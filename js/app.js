@@ -73,6 +73,10 @@
     if (mobileBadge) {
       mobileBadge.textContent = userFavorites.size;
     }
+    const dropdownBadge = document.getElementById('dropdownCountFavorites');
+    if (dropdownBadge) {
+      dropdownBadge.textContent = userFavorites.size;
+    }
   }
 
   // --- 2. SISTEMA DE TOAST NOTIFICATIONS ---
@@ -1296,6 +1300,38 @@
       });
     });
 
+    // Header Mobile/Tablet Menu Dropdown Toggle
+    const btnHeaderMenuToggle = document.getElementById('btnHeaderMenuToggle');
+    const headerMobileDropdown = document.getElementById('headerMobileDropdown');
+    const headerMenuIcon = document.getElementById('headerMenuIcon');
+
+    btnHeaderMenuToggle?.addEventListener('click', () => {
+      LuminaAudio.play('click');
+      const isOpen = headerMobileDropdown?.classList.toggle('is-open');
+      if (headerMenuIcon && window.lucide) {
+        headerMenuIcon.setAttribute('data-lucide', isOpen ? 'X' : 'Menu');
+        lucide.createIcons();
+      }
+    });
+
+    document.querySelectorAll('.mobile-dropdown-link').forEach(link => {
+      link.addEventListener('click', () => {
+        LuminaAudio.play('select');
+        headerMobileDropdown?.classList.remove('is-open');
+        if (headerMenuIcon && window.lucide) {
+          headerMenuIcon.setAttribute('data-lucide', 'Menu');
+          lucide.createIcons();
+        }
+        document.querySelectorAll('.mobile-dropdown-link').forEach(l => l.classList.remove('is-active'));
+        link.classList.add('is-active');
+
+        if (link.getAttribute('data-nav-cat') === 'favoritos') {
+          selectCategory('favoritos');
+          document.getElementById('catalogoCompleto')?.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
     // Keyboard Shortcuts (Esc to close modals, / to search)
     window.addEventListener('keydown', (e) => {
       if (e.key === '/' && document.activeElement !== document.getElementById('globalSearchInput')) {
@@ -1308,6 +1344,11 @@
         document.getElementById('globalSearchInput')?.blur();
         mobileSearchBar?.classList.remove('is-open');
         mobileSearchInput?.blur();
+        headerMobileDropdown?.classList.remove('is-open');
+        if (headerMenuIcon && window.lucide) {
+          headerMenuIcon.setAttribute('data-lucide', 'Menu');
+          lucide.createIcons();
+        }
       }
     });
   }

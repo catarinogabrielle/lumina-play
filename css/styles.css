@@ -72,17 +72,26 @@ body {
 /* Modern Header Navigation Link - Spacious & Clean */
 .header-nav-link {
   font-family: 'Orbitron', sans-serif;
-  font-size: 0.78rem;
-  letter-spacing: 0.06em;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
   color: #94a3b8;
-  padding: 0.55rem 1rem;
-  border-radius: 0.85rem;
+  padding: 0.45rem 0.75rem;
+  border-radius: 0.75rem;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
   white-space: nowrap;
+}
+
+@media (min-width: 1280px) {
+  .header-nav-link {
+    font-size: 0.78rem;
+    padding: 0.55rem 1rem;
+    border-radius: 0.85rem;
+    gap: 0.5rem;
+  }
 }
 
 .header-nav-link:hover {
@@ -112,17 +121,25 @@ body {
 
 /* Header Icon Button (Compact & Square-Rounded) */
 .header-icon-btn {
-  width: 2.6rem;
-  height: 2.6rem;
+  width: 2.35rem;
+  height: 2.35rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   background: rgba(15, 23, 42, 0.75);
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: #94a3b8;
-  border-radius: 0.85rem;
+  border-radius: 0.75rem;
   transition: all 0.2s ease;
   flex-shrink: 0;
+}
+
+@media (min-width: 640px) {
+  .header-icon-btn {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.85rem;
+  }
 }
 
 .header-icon-btn:hover {
@@ -507,7 +524,7 @@ body {
   box-shadow: 0 -4px 25px rgba(0, 0, 0, 0.6);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .mobile-bottom-nav {
     display: none !important;
   }
@@ -534,19 +551,19 @@ body {
   transform: translateY(-1px);
 }
 
-/* Espaçamento inferior do body no mobile para não cobrir o rodapé */
+/* Espaçamento inferior do body no mobile e tablet para não cobrir o rodapé */
 body {
   padding-bottom: 5.5rem;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   body {
     padding-bottom: 0;
   }
 }
 
 /* ==========================================================================
-   BARRA DE BUSCA EXPANSÍVEL MOBILE
+   BARRA DE BUSCA EXPANSÍVEL MOBILE & DROPDOWN TABLET/MOBILE
    ========================================================================== */
 #mobileSearchBar {
   max-height: 0;
@@ -558,6 +575,40 @@ body {
 #mobileSearchBar.is-open {
   max-height: 80px;
   opacity: 1;
+}
+
+.header-mobile-dropdown {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+}
+
+.header-mobile-dropdown.is-open {
+  max-height: 320px;
+  opacity: 1;
+}
+
+.mobile-dropdown-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.7rem 1rem;
+  border-radius: 0.85rem;
+  color: #cbd5e1;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: all 0.2s ease;
+}
+
+.mobile-dropdown-link:hover,
+.mobile-dropdown-link.is-active {
+  color: #38bdf8;
+  background: rgba(6, 182, 212, 0.14);
+  border-color: rgba(56, 189, 248, 0.35);
 }
 
 /* ==========================================================================
