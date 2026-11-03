@@ -65,6 +65,10 @@
     if (badge) {
       badge.textContent = userFavorites.size;
     }
+    const headerBadge = document.getElementById('headerCountFavorites');
+    if (headerBadge) {
+      headerBadge.textContent = userFavorites.size;
+    }
     const mobileBadge = document.getElementById('mobileCountFavorites');
     if (mobileBadge) {
       mobileBadge.textContent = userFavorites.size;
@@ -1250,11 +1254,25 @@
       });
     });
 
-    // Keyboard Shortcuts (Esc to close modals)
+    // Header Navigation Links
+    document.querySelectorAll('.header-nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        LuminaAudio.play('select');
+        document.querySelectorAll('.header-nav-link').forEach(l => l.classList.remove('is-active'));
+        link.classList.add('is-active');
+      });
+    });
+
+    // Keyboard Shortcuts (Esc to close modals, / to search)
     window.addEventListener('keydown', (e) => {
+      if (e.key === '/' && document.activeElement !== document.getElementById('globalSearchInput')) {
+        e.preventDefault();
+        document.getElementById('globalSearchInput')?.focus();
+      }
       if (e.key === 'Escape') {
         closeGameModal();
         closeAddGameModal();
+        document.getElementById('globalSearchInput')?.blur();
       }
     });
   }

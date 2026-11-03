@@ -56,98 +56,99 @@
 <body class="min-h-screen bg-cyber-mesh selection:bg-cyan-400 selection:text-slate-950">
 
   <!-- ===================================================================== -->
-  <!-- BARRA DE NAVEGAÇÃO SUPERIOR (TOP NAVIGATION)                          -->
+  <!-- BARRA DE NAVEGAÇÃO SUPERIOR (TOP NAVIGATION // SLEEK GAMING HEADER)  -->
   <!-- ===================================================================== -->
-  <header class="sticky top-0 z-40 glass-nav px-4 sm:px-6 lg:px-10 py-3.5">
-    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
+  <header class="sticky top-0 z-40 glass-nav px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto h-20 flex items-center justify-between gap-4">
       
-      <!-- Identidade Visual & Logo -->
-      <a href="#topo" class="flex items-center gap-3 group">
+      <!-- Lado Esquerdo: Identidade Visual & Logo -->
+      <a href="#topo" class="flex items-center gap-3.5 group shrink-0">
         <div class="brand-icon-wrapper w-11 h-11 rounded-2xl bg-gradient-to-br from-cyan-400 via-indigo-500 to-purple-600 p-[2px] shadow-lg shadow-cyan-500/25 transition">
-          <div class="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center p-1 overflow-hidden">
+          <div class="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center p-1.5 overflow-hidden">
             <img src="assets/icons/lumina-icon.svg" alt="Lumina Play Logo" class="w-full h-full object-contain" />
           </div>
         </div>
-        <div>
-          <div class="flex items-center gap-2">
-            <span class="font-gamer text-lg sm:text-xl font-black tracking-wider bg-gradient-to-r from-white via-cyan-200 to-indigo-300 bg-clip-text text-transparent">
-              LUMINA PLAY
-            </span>
-            <span class="text-[10px] font-gamer uppercase tracking-widest px-2 py-0.5 rounded-md bg-cyan-500/15 text-cyan-300 border border-cyan-400/30">
-              STORE & HUB
-            </span>
+        <div class="flex items-center gap-2.5">
+          <div class="flex items-baseline">
+            <span class="font-gamer text-lg sm:text-xl font-black tracking-wider text-white">LUMINA</span>
+            <span class="font-gamer text-lg sm:text-xl font-black tracking-wider bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent ml-1">PLAY</span>
           </div>
-          <p class="text-xs text-slate-400 hidden sm:block">Portal Oficial de Jogos Bíblicos, Educacionais, Leitura & Devocionais</p>
+          <span class="text-[9px] font-gamer uppercase tracking-widest px-2 py-0.5 rounded-full bg-cyan-500/15 text-cyan-300 border border-cyan-400/30 font-bold hidden sm:inline-block">
+            HUB
+          </span>
         </div>
       </a>
 
-      <!-- Links Rápidos de Categoria na Header -->
-      <nav class="hidden xl:flex items-center gap-1 bg-slate-900/80 border border-slate-800 rounded-2xl p-1.5" aria-label="Navegação rápida de categorias">
-        <button type="button" data-nav-cat="all" class="nav-cat-btn px-3.5 py-1.5 rounded-xl text-xs font-gamer uppercase tracking-wider bg-cyan-500 text-slate-950 font-bold transition">
-          Destaques
-        </button>
-        <button type="button" data-nav-cat="biblico" class="nav-cat-btn px-3.5 py-1.5 rounded-xl text-xs font-gamer uppercase tracking-wider text-slate-300 hover:text-white transition">
-          Jogos Bíblicos
-        </button>
-        <button type="button" data-nav-cat="educacional" class="nav-cat-btn px-3.5 py-1.5 rounded-xl text-xs font-gamer uppercase tracking-wider text-slate-300 hover:text-white transition">
-          Educacionais
-        </button>
-        <button type="button" data-nav-cat="leitura" class="nav-cat-btn px-3.5 py-1.5 rounded-xl text-xs font-gamer uppercase tracking-wider text-slate-300 hover:text-white transition">
-          Leitura Bíblica
-        </button>
-        <button type="button" data-nav-cat="devocional" class="nav-cat-btn px-3.5 py-1.5 rounded-xl text-xs font-gamer uppercase tracking-wider text-slate-300 hover:text-white transition">
-          Devocionais
-        </button>
-        <button type="button" data-nav-cat="favoritos" class="nav-cat-btn px-3.5 py-1.5 rounded-xl text-xs font-gamer uppercase tracking-wider text-rose-300 hover:text-rose-200 transition flex items-center gap-1">
-          <i data-lucide="Heart" class="w-3.5 h-3.5 fill-rose-500 text-rose-500"></i>
+      <!-- Centro: Links de Navegação Elegantes (Padrão Steam / Epic) -->
+      <nav class="hidden lg:flex items-center gap-1.5" aria-label="Navegação Principal">
+        <a href="#topo" class="header-nav-link is-active">
+          <i data-lucide="Compass" class="w-4 h-4 text-cyan-400"></i>
+          <span>Explorar</span>
+        </a>
+        <a href="#catalogoCompleto" class="header-nav-link">
+          <i data-lucide="Gamepad2" class="w-4 h-4"></i>
+          <span>Catálogo</span>
+        </a>
+        <a href="#desafioDiarioSection" class="header-nav-link">
+          <i data-lucide="Flame" class="w-4 h-4 text-amber-400"></i>
+          <span>Desafio Diário</span>
+        </a>
+        <button type="button" data-nav-cat="favoritos" class="header-nav-link nav-cat-btn text-rose-300 hover:text-white">
+          <i data-lucide="Heart" class="w-4 h-4 fill-rose-500 text-rose-500"></i>
           <span>Favoritos</span>
+          <span id="headerCountFavorites" class="px-1.5 py-0.2 rounded-full bg-rose-500/20 text-rose-300 text-[10px] font-bold border border-rose-500/30">0</span>
         </button>
       </nav>
 
-      <!-- Barra de Busca, Criador de Jogo & Controle de SFX -->
-      <div class="flex items-center gap-2.5 flex-1 sm:flex-initial justify-end">
-        <div class="relative w-full sm:w-60">
-          <i data-lucide="Search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+      <!-- Lado Direito: Busca, SFX, Instalação PWA & Botão Novo Jogo -->
+      <div class="flex items-center gap-2.5">
+        
+        <!-- Barra de Busca com Atalho -->
+        <div class="relative w-44 sm:w-60 search-box-sleek rounded-2xl flex items-center">
+          <i data-lucide="Search" class="w-4 h-4 text-slate-400 absolute left-3.5 pointer-events-none"></i>
           <input
             id="globalSearchInput"
             type="text"
-            placeholder="Buscar jogos, temas, livros..."
-            class="w-full pl-10 pr-4 py-2 rounded-xl bg-slate-900/90 border border-slate-700/80 focus:border-cyan-400 focus:outline-none text-xs sm:text-sm text-white placeholder-slate-400 transition"
+            placeholder="Buscar jogos..."
+            class="w-full pl-10 pr-8 py-2 rounded-2xl bg-transparent text-xs text-white placeholder-slate-400 focus:outline-none"
           />
+          <kbd class="hidden sm:inline-block absolute right-3 text-[10px] font-mono text-slate-500 bg-slate-900 border border-slate-700/60 px-1.5 py-0.5 rounded pointer-events-none">
+            /
+          </kbd>
         </div>
 
         <!-- Botão Instalar App (PWA) -->
         <button
           id="btnPwaInstall"
           type="button"
-          class="hidden p-2.5 rounded-xl bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-400/40 transition flex items-center gap-1.5 text-xs font-gamer uppercase shrink-0"
-          title="Instalar Lumina Play como App"
+          class="hidden header-icon-btn p-2.5 rounded-2xl shrink-0"
+          title="Instalar Lumina Play como Aplicativo"
         >
-          <i data-lucide="Download" class="w-4 h-4"></i>
-          <span class="hidden xl:inline text-[11px] font-bold">Instalar App</span>
-        </button>
-
-        <!-- Botão Adicionar Jogo / Gerador -->
-        <button
-          id="btnOpenAddGame"
-          type="button"
-          class="p-2.5 rounded-xl bg-indigo-500/20 hover:bg-indigo-500/30 text-indigo-300 border border-indigo-400/40 transition flex items-center gap-1.5 text-xs font-gamer uppercase shrink-0"
-          title="Adicionar Jogo ou Gerar Código"
-        >
-          <i data-lucide="PlusCircle" class="w-4 h-4 text-cyan-400"></i>
-          <span class="hidden md:inline text-[11px] font-bold">Novo Jogo</span>
+          <i data-lucide="Download" class="w-4 h-4 text-cyan-400"></i>
         </button>
 
         <!-- Toggle de Sons SFX -->
         <button
           id="btnSoundToggle"
           type="button"
-          class="p-2.5 rounded-xl bg-slate-900/90 hover:bg-slate-800 border border-slate-700/80 text-cyan-300 transition flex items-center gap-1.5 text-xs font-medium shrink-0"
-          title="Ativar/Desativar Efeitos Sonoros da Interface"
+          class="header-icon-btn p-2.5 rounded-2xl shrink-0 flex items-center gap-1.5"
+          title="Ativar/Desativar Efeitos Sonoros"
         >
-          <i id="soundIcon" data-lucide="Volume2" class="w-4 h-4"></i>
-          <span id="soundStatusText" class="hidden lg:inline font-gamer text-[11px]">SFX ON</span>
+          <i id="soundIcon" data-lucide="Volume2" class="w-4 h-4 text-cyan-400"></i>
+          <span id="soundStatusText" class="hidden xl:inline font-gamer text-[10px]">SFX ON</span>
         </button>
+
+        <!-- Botão Adicionar Jogo / Gerador -->
+        <button
+          id="btnOpenAddGame"
+          type="button"
+          class="btn-launch px-4 py-2.5 rounded-2xl text-xs font-gamer font-bold text-white uppercase tracking-wider flex items-center gap-1.5 shrink-0 shadow-lg"
+          title="Adicionar Jogo ou Gerar Código"
+        >
+          <i data-lucide="Plus" class="w-4 h-4"></i>
+          <span class="hidden sm:inline">Novo Jogo</span>
+        </button>
+
       </div>
 
     </div>
