@@ -56,64 +56,63 @@
 <body class="min-h-screen bg-cyber-mesh selection:bg-cyan-400 selection:text-slate-950">
 
   <!-- ===================================================================== -->
-  <!-- BARRA DE NAVEGAÇÃO SUPERIOR (TOP NAVIGATION // 100% FLUIDA & RESPONSIVA) -->
+  <!-- BARRA DE NAVEGAÇÃO SUPERIOR (TOP NAVIGATION // RESPONSIVA A PARTIR DE 1840px) -->
   <!-- ===================================================================== -->
-  <header class="sticky top-0 z-40 glass-nav w-full px-3 sm:px-4 lg:px-6 xl:px-10">
-    <div class="w-full max-w-[1560px] mx-auto h-16 sm:h-20 flex items-center justify-between gap-2 sm:gap-3 lg:gap-4 xl:gap-6 min-w-0">
+  <header class="sticky top-0 z-40 glass-nav w-full px-3 sm:px-6 lg:px-8 xl:px-12">
+    <div class="w-full max-w-[1840px] mx-auto h-16 sm:h-20 flex items-center justify-between gap-3 sm:gap-6 min-w-0">
       
       <!-- Lado Esquerdo: Identidade Visual & Logo -->
-      <a href="#topo" class="flex items-center gap-2 sm:gap-2.5 group shrink-0 whitespace-nowrap">
-        <div class="brand-icon-wrapper w-9 h-9 sm:w-10 sm:h-10 xl:w-11 xl:h-11 rounded-xl sm:rounded-2xl bg-gradient-to-br from-cyan-400 via-indigo-500 to-purple-600 p-[2px] shadow-lg shadow-cyan-500/25 transition">
+      <a href="#topo" class="flex items-center gap-2.5 sm:gap-3 group shrink-0 whitespace-nowrap">
+        <div class="brand-icon-wrapper w-9 h-9 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl bg-gradient-to-br from-cyan-400 via-indigo-500 to-purple-600 p-[2px] shadow-lg shadow-cyan-500/25 transition">
           <div class="w-full h-full bg-slate-950 rounded-[10px] sm:rounded-[14px] flex items-center justify-center p-1 sm:p-1.5 overflow-hidden">
             <img src="assets/icons/lumina-icon.svg" alt="Lumina Play Logo" class="w-full h-full object-contain" />
           </div>
         </div>
-        <div class="flex items-center gap-1.5">
+        <div class="flex items-center gap-1.5 sm:gap-2">
           <div class="flex items-baseline">
-            <span class="font-gamer text-base sm:text-lg xl:text-xl font-black tracking-wider text-white">LUMINA</span>
-            <span class="font-gamer text-base sm:text-lg xl:text-xl font-black tracking-wider bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent ml-1">PLAY</span>
+            <span class="font-gamer text-base sm:text-xl font-black tracking-wider text-white">LUMINA</span>
+            <span class="font-gamer text-base sm:text-xl font-black tracking-wider bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent ml-1">PLAY</span>
           </div>
-          <span class="text-[9px] font-gamer uppercase tracking-widest px-2 py-0.5 rounded-full bg-cyan-500/15 text-cyan-300 border border-cyan-400/30 font-bold hidden 2xl:inline-block">
+          <span class="text-[9px] font-gamer uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-cyan-500/15 text-cyan-300 border border-cyan-400/30 font-bold hidden sm:inline-block">
             HUB
           </span>
         </div>
       </a>
 
-      <!-- Centro: Links de Navegação (visível a partir de lg: 1024px com adaptação compacta) -->
-      <nav class="hidden lg:flex items-center gap-1 xl:gap-2.5 shrink-0" aria-label="Navegação Principal">
-        <a href="#topo" class="header-nav-link is-active">
-          <i data-lucide="Compass" class="w-3.5 h-3.5 xl:w-4 xl:h-4 text-cyan-400 shrink-0"></i>
+      <!-- Centro: Links de Navegação (exibição expandida a partir de 1840px para garantir total espaço livre) -->
+      <nav class="header-nav-desktop items-center gap-2 xl:gap-4 shrink-0" aria-label="Navegação Principal">
+        <a href="#topo" class="header-nav-link is-active whitespace-nowrap">
+          <i data-lucide="Compass" class="w-4 h-4 text-cyan-400 shrink-0"></i>
           <span>Explorar</span>
         </a>
-        <a href="#catalogoCompleto" class="header-nav-link">
-          <i data-lucide="Gamepad2" class="w-3.5 h-3.5 xl:w-4 xl:h-4 shrink-0"></i>
+        <a href="#catalogoCompleto" class="header-nav-link whitespace-nowrap">
+          <i data-lucide="Gamepad2" class="w-4 h-4 shrink-0"></i>
           <span>Catálogo</span>
         </a>
-        <a href="#desafioDiarioSection" class="header-nav-link">
-          <i data-lucide="Flame" class="w-3.5 h-3.5 xl:w-4 xl:h-4 text-amber-400 shrink-0"></i>
-          <span class="hidden xl:inline">Desafio Diário</span>
-          <span class="xl:hidden">Desafio</span>
+        <a href="#desafioDiarioSection" class="header-nav-link whitespace-nowrap">
+          <i data-lucide="Flame" class="w-4 h-4 text-amber-400 shrink-0"></i>
+          <span>Desafio Diário</span>
         </a>
-        <button type="button" data-nav-cat="favoritos" class="header-nav-link nav-cat-btn text-rose-300 hover:text-white">
-          <i data-lucide="Heart" class="w-3.5 h-3.5 xl:w-4 xl:h-4 fill-rose-500 text-rose-500 shrink-0"></i>
+        <button type="button" data-nav-cat="favoritos" class="header-nav-link nav-cat-btn text-rose-300 hover:text-white whitespace-nowrap">
+          <i data-lucide="Heart" class="w-4 h-4 fill-rose-500 text-rose-500 shrink-0"></i>
           <span>Favoritos</span>
-          <span id="headerCountFavorites" class="px-1.5 py-0.5 rounded-full bg-rose-500/20 text-rose-300 text-[10px] font-bold border border-rose-500/30">0</span>
+          <span id="headerCountFavorites" class="px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 text-[10px] font-bold border border-rose-500/30">0</span>
         </button>
       </nav>
 
-      <!-- Lado Direito: Busca, SFX, Instalação PWA, Botão Novo Jogo & Menu Mobile/Tablet -->
-      <div class="flex items-center gap-1.5 sm:gap-2 xl:gap-2.5 shrink-0">
+      <!-- Lado Direito: Busca, SFX, Instalação PWA, Botão Novo Jogo & Botão Menu -->
+      <div class="flex items-center gap-2 sm:gap-3 shrink-0">
         
         <!-- Barra de Busca Desktop / Tablet (a partir de sm: 640px) -->
-        <div class="hidden sm:flex relative w-32 md:w-40 lg:w-36 xl:w-52 focus-within:w-44 xl:focus-within:w-60 search-box-sleek rounded-xl sm:rounded-2xl items-center transition-all duration-300">
-          <i data-lucide="Search" class="w-3.5 h-3.5 text-slate-400 absolute left-3 pointer-events-none"></i>
+        <div class="hidden sm:flex relative w-40 md:w-52 lg:w-60 focus-within:w-64 search-box-sleek rounded-xl sm:rounded-2xl items-center transition-all duration-300">
+          <i data-lucide="Search" class="w-4 h-4 text-slate-400 absolute left-3.5 pointer-events-none"></i>
           <input
             id="globalSearchInput"
             type="text"
             placeholder="Buscar..."
-            class="w-full pl-8 pr-7 py-1.5 sm:py-2 rounded-xl sm:rounded-2xl bg-transparent text-xs text-white placeholder-slate-400 focus:outline-none"
+            class="w-full pl-9 pr-8 py-2 rounded-xl sm:rounded-2xl bg-transparent text-xs text-white placeholder-slate-400 focus:outline-none"
           />
-          <kbd class="hidden md:inline-block absolute right-2.5 text-[9px] font-mono text-slate-500 bg-slate-900 border border-slate-700/60 px-1 py-0.5 rounded pointer-events-none">
+          <kbd class="hidden md:inline-block absolute right-2.5 text-[9px] font-mono text-slate-500 bg-slate-900 border border-slate-700/60 px-1.5 py-0.5 rounded pointer-events-none">
             /
           </kbd>
         </div>
@@ -156,21 +155,20 @@
         <button
           id="btnOpenAddGame"
           type="button"
-          class="btn-launch px-2.5 py-1.5 sm:px-3 sm:py-2 xl:px-4 xl:py-2.5 rounded-xl sm:rounded-2xl text-xs font-gamer font-bold text-white uppercase tracking-wider flex items-center gap-1.5 shrink-0 shadow-lg whitespace-nowrap"
+          class="btn-launch px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl sm:rounded-2xl text-xs font-gamer font-bold text-white uppercase tracking-wider flex items-center gap-1.5 shrink-0 shadow-lg whitespace-nowrap"
           title="Adicionar Jogo ou Gerar Código"
         >
           <i data-lucide="Plus" class="w-4 h-4"></i>
-          <span class="hidden sm:inline lg:hidden xl:inline">Novo Jogo</span>
-          <span class="hidden lg:inline xl:hidden">Novo</span>
+          <span class="hidden sm:inline">Novo Jogo</span>
         </button>
 
-        <!-- Botão Menu Dropdown para Tablets e Celulares (< 1024px) -->
+        <!-- Botão Menu Dropdown (< 1840px) -->
         <button
           id="btnHeaderMenuToggle"
           type="button"
-          class="lg:hidden header-icon-btn"
-          title="Abrir Menu de Navegação"
-          aria-label="Abrir Menu de Navegação"
+          class="header-menu-toggle-btn header-icon-btn"
+          title="Menu de Navegação"
+          aria-label="Menu de Navegação"
         >
           <i id="headerMenuIcon" data-lucide="Menu" class="w-4 h-4 text-slate-300"></i>
         </button>
@@ -192,28 +190,30 @@
       </div>
     </div>
 
-    <!-- Menu Dropdown para Tablets e Telas Menores (< 1024px) -->
-    <div id="headerMobileDropdown" class="lg:hidden header-mobile-dropdown">
-      <div class="px-2 pt-2 pb-4 space-y-1.5 border-t border-white/10 mt-1">
-        <a href="#topo" class="mobile-dropdown-link is-active">
-          <i data-lucide="Compass" class="w-4 h-4 text-cyan-400 shrink-0"></i>
-          <span>Explorar Destaques</span>
-        </a>
-        <a href="#catalogoCompleto" class="mobile-dropdown-link">
-          <i data-lucide="Gamepad2" class="w-4 h-4 text-purple-400 shrink-0"></i>
-          <span>Catálogo de Jogos & Apps</span>
-        </a>
-        <a href="#desafioDiarioSection" class="mobile-dropdown-link">
-          <i data-lucide="Flame" class="w-4 h-4 text-amber-400 shrink-0"></i>
-          <span>Desafio Bíblico Diário</span>
-        </a>
-        <button type="button" data-nav-cat="favoritos" class="mobile-dropdown-link w-full text-left justify-between">
-          <div class="flex items-center gap-2.5">
-            <i data-lucide="Heart" class="w-4 h-4 fill-rose-500 text-rose-500 shrink-0"></i>
-            <span>Meus Favoritos</span>
-          </div>
-          <span id="dropdownCountFavorites" class="px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 text-[10px] font-bold border border-rose-500/30">0</span>
-        </button>
+    <!-- Menu Dropdown Responsivo (< 1840px) -->
+    <div id="headerMobileDropdown" class="header-mobile-dropdown">
+      <div class="px-3 sm:px-6 pt-2 pb-4 border-t border-white/10 mt-1 max-w-[1840px] mx-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 pt-1">
+          <a href="#topo" class="mobile-dropdown-link is-active">
+            <i data-lucide="Compass" class="w-4 h-4 text-cyan-400 shrink-0"></i>
+            <span>Explorar Destaques</span>
+          </a>
+          <a href="#catalogoCompleto" class="mobile-dropdown-link">
+            <i data-lucide="Gamepad2" class="w-4 h-4 text-purple-400 shrink-0"></i>
+            <span>Catálogo de Jogos & Apps</span>
+          </a>
+          <a href="#desafioDiarioSection" class="mobile-dropdown-link">
+            <i data-lucide="Flame" class="w-4 h-4 text-amber-400 shrink-0"></i>
+            <span>Desafio Bíblico Diário</span>
+          </a>
+          <button type="button" data-nav-cat="favoritos" class="mobile-dropdown-link text-left justify-between">
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="Heart" class="w-4 h-4 fill-rose-500 text-rose-500 shrink-0"></i>
+              <span>Meus Favoritos</span>
+            </div>
+            <span id="dropdownCountFavorites" class="px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 text-[10px] font-bold border border-rose-500/30">0</span>
+          </button>
+        </div>
       </div>
     </div>
   </header>

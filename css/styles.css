@@ -526,7 +526,7 @@ body {
   box-shadow: 0 -4px 25px rgba(0, 0, 0, 0.6);
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   .mobile-bottom-nav {
     display: none !important;
   }
@@ -553,19 +553,42 @@ body {
   transform: translateY(-1px);
 }
 
-/* Espaçamento inferior do body no mobile e tablet para não cobrir o rodapé */
+/* Espaçamento inferior do body no mobile para não cobrir o rodapé */
 body {
   padding-bottom: 5.5rem;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   body {
-    padding-bottom: 0;
+    padding-bottom: 0 !important;
   }
 }
 
 /* ==========================================================================
-   BARRA DE BUSCA EXPANSÍVEL MOBILE & DROPDOWN TABLET/MOBILE
+   BREAKPOINT 1840px - RESPONSIVIDADE DO HEADER
+   ========================================================================== */
+.header-nav-desktop {
+  display: none !important;
+}
+
+.header-menu-toggle-btn {
+  display: inline-flex !important;
+}
+
+@media (min-width: 1840px) {
+  .header-nav-desktop {
+    display: flex !important;
+  }
+  .header-menu-toggle-btn {
+    display: none !important;
+  }
+  .header-mobile-dropdown {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   BARRA DE BUSCA EXPANSÍVEL MOBILE & DROPDOWN (< 1840px)
    ========================================================================== */
 #mobileSearchBar {
   max-height: 0;
@@ -587,7 +610,7 @@ body {
 }
 
 .header-mobile-dropdown.is-open {
-  max-height: 320px;
+  max-height: 380px;
   opacity: 1;
 }
 
