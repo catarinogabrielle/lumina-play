@@ -56,13 +56,13 @@
 <body class="min-h-screen bg-cyber-mesh selection:bg-cyan-400 selection:text-slate-950">
 
   <!-- ===================================================================== -->
-  <!-- BARRA DE NAVEGAÇÃO SUPERIOR (TOP NAVIGATION // SLEEK GAMING HEADER)  -->
+  <!-- BARRA DE NAVEGAÇÃO SUPERIOR (TOP NAVIGATION // ESPAÇOSA & MODERNA)    -->
   <!-- ===================================================================== -->
-  <header class="sticky top-0 z-40 glass-nav px-4 sm:px-6 lg:px-8">
-    <div class="max-w-7xl mx-auto h-20 flex items-center justify-between gap-4">
+  <header class="sticky top-0 z-40 glass-nav w-full px-4 sm:px-8 lg:px-12">
+    <div class="w-full max-w-[1560px] mx-auto h-20 flex items-center justify-between gap-6">
       
       <!-- Lado Esquerdo: Identidade Visual & Logo -->
-      <a href="#topo" class="flex items-center gap-3.5 group shrink-0">
+      <a href="#topo" class="flex items-center gap-3.5 group shrink-0 whitespace-nowrap">
         <div class="brand-icon-wrapper w-11 h-11 rounded-2xl bg-gradient-to-br from-cyan-400 via-indigo-500 to-purple-600 p-[2px] shadow-lg shadow-cyan-500/25 transition">
           <div class="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center p-1.5 overflow-hidden">
             <img src="assets/icons/lumina-icon.svg" alt="Lumina Play Logo" class="w-full h-full object-contain" />
@@ -73,44 +73,44 @@
             <span class="font-gamer text-lg sm:text-xl font-black tracking-wider text-white">LUMINA</span>
             <span class="font-gamer text-lg sm:text-xl font-black tracking-wider bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent ml-1">PLAY</span>
           </div>
-          <span class="text-[9px] font-gamer uppercase tracking-widest px-2 py-0.5 rounded-full bg-cyan-500/15 text-cyan-300 border border-cyan-400/30 font-bold hidden sm:inline-block">
+          <span class="text-[9px] font-gamer uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-cyan-500/15 text-cyan-300 border border-cyan-400/30 font-bold hidden xl:inline-block">
             HUB
           </span>
         </div>
       </a>
 
-      <!-- Centro: Links de Navegação Elegantes (Padrão Steam / Epic) -->
-      <nav class="hidden lg:flex items-center gap-1.5" aria-label="Navegação Principal">
-        <a href="#topo" class="header-nav-link is-active">
+      <!-- Centro: Links de Navegação Espaçosos (Padrão Gaming Store) -->
+      <nav class="hidden md:flex items-center gap-2 lg:gap-4 shrink-0" aria-label="Navegação Principal">
+        <a href="#topo" class="header-nav-link is-active whitespace-nowrap">
           <i data-lucide="Compass" class="w-4 h-4 text-cyan-400"></i>
           <span>Explorar</span>
         </a>
-        <a href="#catalogoCompleto" class="header-nav-link">
+        <a href="#catalogoCompleto" class="header-nav-link whitespace-nowrap">
           <i data-lucide="Gamepad2" class="w-4 h-4"></i>
           <span>Catálogo</span>
         </a>
-        <a href="#desafioDiarioSection" class="header-nav-link">
+        <a href="#desafioDiarioSection" class="header-nav-link whitespace-nowrap">
           <i data-lucide="Flame" class="w-4 h-4 text-amber-400"></i>
           <span>Desafio Diário</span>
         </a>
-        <button type="button" data-nav-cat="favoritos" class="header-nav-link nav-cat-btn text-rose-300 hover:text-white">
+        <button type="button" data-nav-cat="favoritos" class="header-nav-link nav-cat-btn text-rose-300 hover:text-white whitespace-nowrap">
           <i data-lucide="Heart" class="w-4 h-4 fill-rose-500 text-rose-500"></i>
           <span>Favoritos</span>
-          <span id="headerCountFavorites" class="px-1.5 py-0.2 rounded-full bg-rose-500/20 text-rose-300 text-[10px] font-bold border border-rose-500/30">0</span>
+          <span id="headerCountFavorites" class="px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 text-[10px] font-bold border border-rose-500/30">0</span>
         </button>
       </nav>
 
       <!-- Lado Direito: Busca, SFX, Instalação PWA & Botão Novo Jogo -->
-      <div class="flex items-center gap-2.5">
+      <div class="flex items-center gap-3 shrink-0">
         
-        <!-- Barra de Busca com Atalho -->
-        <div class="relative w-44 sm:w-60 search-box-sleek rounded-2xl flex items-center">
+        <!-- Barra de Busca Expansiva com Atalho -->
+        <div class="relative w-36 sm:w-48 lg:w-56 focus-within:w-64 search-box-sleek rounded-2xl flex items-center transition-all duration-300">
           <i data-lucide="Search" class="w-4 h-4 text-slate-400 absolute left-3.5 pointer-events-none"></i>
           <input
             id="globalSearchInput"
             type="text"
-            placeholder="Buscar jogos..."
-            class="w-full pl-10 pr-8 py-2 rounded-2xl bg-transparent text-xs text-white placeholder-slate-400 focus:outline-none"
+            placeholder="Buscar..."
+            class="w-full pl-9 pr-8 py-2 rounded-2xl bg-transparent text-xs text-white placeholder-slate-400 focus:outline-none"
           />
           <kbd class="hidden sm:inline-block absolute right-3 text-[10px] font-mono text-slate-500 bg-slate-900 border border-slate-700/60 px-1.5 py-0.5 rounded pointer-events-none">
             /
@@ -121,28 +121,28 @@
         <button
           id="btnPwaInstall"
           type="button"
-          class="hidden header-icon-btn p-2.5 rounded-2xl shrink-0"
+          class="hidden header-icon-btn"
           title="Instalar Lumina Play como Aplicativo"
         >
           <i data-lucide="Download" class="w-4 h-4 text-cyan-400"></i>
         </button>
 
-        <!-- Toggle de Sons SFX -->
+        <!-- Toggle de Sons SFX (Ícone limpo) -->
         <button
           id="btnSoundToggle"
           type="button"
-          class="header-icon-btn p-2.5 rounded-2xl shrink-0 flex items-center gap-1.5"
+          class="header-icon-btn"
           title="Ativar/Desativar Efeitos Sonoros"
         >
           <i id="soundIcon" data-lucide="Volume2" class="w-4 h-4 text-cyan-400"></i>
-          <span id="soundStatusText" class="hidden xl:inline font-gamer text-[10px]">SFX ON</span>
+          <span id="soundStatusText" class="sr-only">SFX ON</span>
         </button>
 
         <!-- Botão Adicionar Jogo / Gerador -->
         <button
           id="btnOpenAddGame"
           type="button"
-          class="btn-launch px-4 py-2.5 rounded-2xl text-xs font-gamer font-bold text-white uppercase tracking-wider flex items-center gap-1.5 shrink-0 shadow-lg"
+          class="btn-launch px-4 py-2.5 rounded-2xl text-xs font-gamer font-bold text-white uppercase tracking-wider flex items-center gap-1.5 shrink-0 shadow-lg whitespace-nowrap"
           title="Adicionar Jogo ou Gerar Código"
         >
           <i data-lucide="Plus" class="w-4 h-4"></i>

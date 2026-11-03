@@ -62,26 +62,27 @@ body {
    GLASSMORPHISM PANELS & NAVIGATION
    ========================================================================== */
 .glass-nav {
-  background: rgba(6, 8, 17, 0.82);
+  background: rgba(6, 8, 17, 0.88);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
 }
 
-/* Modern Header Navigation Link */
+/* Modern Header Navigation Link - Spacious & Clean */
 .header-nav-link {
   font-family: 'Orbitron', sans-serif;
   font-size: 0.78rem;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   color: #94a3b8;
-  padding: 0.5rem 0.9rem;
-  border-radius: 0.75rem;
+  padding: 0.55rem 1rem;
+  border-radius: 0.85rem;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.5rem;
+  white-space: nowrap;
 }
 
 .header-nav-link:hover {
@@ -91,16 +92,16 @@ body {
 
 .header-nav-link.is-active {
   color: #38bdf8;
-  background: rgba(6, 182, 212, 0.12);
+  background: rgba(6, 182, 212, 0.14);
   border: 1px solid rgba(56, 189, 248, 0.35);
   box-shadow: 0 0 16px rgba(6, 182, 212, 0.15);
 }
 
-/* Search Box Sleek */
+/* Search Box Sleek & Responsive Expansion */
 .search-box-sleek {
   background: rgba(15, 23, 42, 0.75);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  transition: all 0.25s ease;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .search-box-sleek:focus-within {
@@ -109,19 +110,27 @@ body {
   box-shadow: 0 0 20px rgba(56, 189, 248, 0.25);
 }
 
-/* Header Icon Button */
+/* Header Icon Button (Compact & Square-Rounded) */
 .header-icon-btn {
+  width: 2.6rem;
+  height: 2.6rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: rgba(15, 23, 42, 0.75);
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: #94a3b8;
+  border-radius: 0.85rem;
   transition: all 0.2s ease;
+  flex-shrink: 0;
 }
 
 .header-icon-btn:hover {
   background: rgba(30, 41, 59, 0.9);
   border-color: rgba(56, 189, 248, 0.5);
   color: #38bdf8;
-  box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.25);
+  transform: translateY(-1px);
 }
 
 .glass-surface {
