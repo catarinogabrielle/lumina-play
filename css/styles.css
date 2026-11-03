@@ -1,0 +1,335 @@
+/* ==========================================================================
+   LUMINA PLAY - GAMER STOREFRONT & HUB STYLESHEET
+   Design System, Glassmorphism, Micro-Interactions & Cyber Gaming Aesthetics
+   ========================================================================== */
+
+:root {
+  --bg-deep: #060811;
+  --bg-surface: rgba(15, 21, 42, 0.72);
+  --bg-surface-hover: rgba(22, 31, 61, 0.88);
+  --card-bg: linear-gradient(165deg, rgba(19, 27, 53, 0.94) 0%, rgba(10, 14, 29, 0.98) 100%);
+  --cyan-glow: #00f2fe;
+  --cyan-accent: #38bdf8;
+  --indigo-accent: #6366f1;
+  --purple-glow: #a855f7;
+  --amber-accent: #fbbf24;
+  --emerald-accent: #10b981;
+  --rose-accent: #f43f5e;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --border-glass: rgba(255, 255, 255, 0.09);
+  --border-glow: rgba(56, 189, 248, 0.45);
+}
+
+/* Reset & Global */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-deep);
+  color: var(--text-main);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+.font-gamer {
+  font-family: 'Orbitron', -apple-system, sans-serif;
+  letter-spacing: 0.05em;
+}
+
+/* ==========================================================================
+   AMBIENT CYBER MESH BACKGROUND
+   ========================================================================== */
+.bg-cyber-mesh {
+  background-color: var(--bg-deep);
+  background-image:
+    radial-gradient(circle at 15% 15%, rgba(14, 165, 233, 0.14) 0%, transparent 38%),
+    radial-gradient(circle at 85% 20%, rgba(139, 92, 246, 0.16) 0%, transparent 42%),
+    radial-gradient(circle at 50% 80%, rgba(245, 158, 11, 0.09) 0%, transparent 42%),
+    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 48px 48px, 48px 48px;
+  background-attachment: fixed;
+}
+
+/* ==========================================================================
+   GLASSMORPHISM PANELS & NAVIGATION
+   ========================================================================== */
+.glass-nav {
+  background: rgba(8, 11, 24, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-surface {
+  background: var(--bg-surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-glass);
+}
+
+.glass-surface-elevated {
+  background: rgba(18, 26, 52, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+}
+
+/* ==========================================================================
+   STORE CARD & VIDEO HOVER EFFECTS (STEAM / EPIC STORE STYLE)
+   ========================================================================== */
+.store-card {
+  background: var(--card-bg);
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  position: relative;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s ease,
+              box-shadow 0.35s ease;
+  will-change: transform;
+}
+
+.store-card:hover {
+  transform: translateY(-8px) scale(1.015);
+  border-color: rgba(56, 189, 248, 0.75);
+  box-shadow: 0 22px 45px -12px rgba(14, 165, 233, 0.3),
+              0 0 25px rgba(139, 92, 246, 0.22);
+  z-index: 20;
+}
+
+.media-stage {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cover-image {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+}
+
+.store-card:hover .cover-image {
+  transform: scale(1.08);
+}
+
+.hover-video-layer {
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.store-card.is-playing-preview .hover-video-layer {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.store-card.is-playing-preview .cover-image {
+  opacity: 0.15;
+}
+
+/* ==========================================================================
+   BUTTONS & CTAs
+   ========================================================================== */
+.btn-launch {
+  background: linear-gradient(135deg, #06b6d4 0%, #4f46e5 55%, #9333ea 100%);
+  box-shadow: 0 8px 25px -4px rgba(79, 70, 229, 0.55);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-launch:hover {
+  box-shadow: 0 12px 32px -4px rgba(6, 182, 212, 0.75);
+  transform: translateY(-1.5px);
+  filter: brightness(1.12);
+}
+
+.btn-launch:active {
+  transform: translateY(0.5px);
+}
+
+.btn-glow-cyan {
+  background: rgba(6, 182, 212, 0.15);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  transition: all 0.2s ease;
+}
+
+.btn-glow-cyan:hover {
+  background: rgba(6, 182, 212, 0.25);
+  border-color: #38bdf8;
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+}
+
+/* Favorite heart button */
+.btn-favorite {
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.2s ease;
+}
+
+.btn-favorite:hover {
+  transform: scale(1.18);
+}
+
+.btn-favorite.is-favorited {
+  color: #f43f5e !important;
+  fill: #f43f5e;
+}
+
+.btn-favorite.is-favorited svg {
+  fill: #f43f5e;
+}
+
+/* ==========================================================================
+   HERO SPOTLIGHT & PROGRESS BAR
+   ========================================================================== */
+.hero-progress-bar {
+  transition: width 0.1s linear;
+}
+
+.hero-thumb-btn {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-thumb-btn.is-active {
+  background: linear-gradient(90deg, rgba(6, 182, 212, 0.22) 0%, rgba(79, 70, 229, 0.2) 60%, rgba(15, 23, 42, 0.9) 100%);
+  border-color: rgba(56, 189, 248, 0.85);
+  box-shadow: 0 4px 20px -2px rgba(6, 182, 212, 0.25);
+  transform: translateX(4px);
+}
+
+/* ==========================================================================
+   BADGES & PILLS
+   ========================================================================== */
+.badge-biblico {
+  background: rgba(6, 182, 212, 0.18);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.4);
+}
+
+.badge-educacional {
+  background: rgba(168, 85, 247, 0.18);
+  color: #c084fc;
+  border: 1px solid rgba(168, 85, 247, 0.4);
+}
+
+.badge-leitura {
+  background: rgba(16, 185, 129, 0.18);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+.badge-devocional {
+  background: rgba(245, 158, 11, 0.18);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
+.badge-special {
+  animation: pulseSpecial 2.2s infinite ease-in-out;
+}
+
+@keyframes pulseSpecial {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(244, 63, 94, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 14px rgba(244, 63, 94, 0.8);
+  }
+}
+
+/* ==========================================================================
+   MODAL TRANSITIONS & OVERLAYS
+   ========================================================================== */
+.modal-backdrop {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-backdrop.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-dialog {
+  transform: scale(0.95) translateY(12px);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  opacity: 0;
+}
+
+.modal-backdrop.is-open .modal-dialog {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+
+/* ==========================================================================
+   CUSTOM SCROLLBAR
+   ========================================================================== */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #060811;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #38bdf8;
+}
+
+/* ==========================================================================
+   TOAST NOTIFICATION
+   ========================================================================== */
+#toastNotification {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 100;
+  transform: translateY(120%);
+  opacity: 0;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+  pointer-events: none;
+}
+
+#toastNotification.show {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Pulsing online indicator */
+.pulse-indicator {
+  position: relative;
+}
+.pulse-indicator::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 9999px;
+  background: inherit;
+  opacity: 0.7;
+  animation: pingIndicator 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes pingIndicator {
+  75%, 100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
