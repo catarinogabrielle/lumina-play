@@ -195,6 +195,56 @@ const CATALOGO_JOGOS_E_APPS = [
 ];
 
 /**
+ * ==============================================================================
+ * DESAFIO BÍBLICO DIÁRIO (GAMIFICAÇÃO & OFENSIVA DE FÉ)
+ * ==============================================================================
+ * Perguntas dinâmicas que alternam diariamente para engajar os jogadores.
+ * ==============================================================================
+ */
+const DESAFIOS_DIARIOS = [
+  {
+    id: 1,
+    pergunta: 'Quantas pedras lisas Davi escolheu no ribeiro antes de enfrentar Golias?',
+    opcoes: ['3 pedras', '5 pedras', '7 pedras', '12 pedras'],
+    correta: 1, // '5 pedras'
+    referencia: '1 Samuel 17:40',
+    explicacao: 'Davi escolheu cinco pedras lisas do ribeiro e as colocou no alforje de pastor.'
+  },
+  {
+    id: 2,
+    pergunta: 'Qual sinal guiou o povo de Israel pelo deserto durante a noite no livro de Êxodo?',
+    opcoes: ['Uma estrela cadente', 'Uma coluna de fogo', 'Um arco-íris brilhante', 'Uma nuvem dourada'],
+    correta: 1, // 'Uma coluna de fogo'
+    referencia: 'Êxodo 13:21-22',
+    explicacao: 'De dia o Senhor ia adiante numa coluna de nuvem e de noite numa coluna de fogo.'
+  },
+  {
+    id: 3,
+    pergunta: 'Segundo Provérbios, qual é o princípio da sabedoria?',
+    opcoes: ['O estudo da filosofia', 'O temor do Senhor', 'A leitura de muitos livros', 'A riqueza material'],
+    correta: 1, // 'O temor do Senhor'
+    referencia: 'Provérbios 9:10',
+    explicacao: 'O temor do Senhor é o princípio da sabedoria, e o conhecimento do Santo é entendimento.'
+  },
+  {
+    id: 4,
+    pergunta: 'Em qual ilha o Apóstolo Paulo sofreu um naufrágio durante sua viagem a Roma?',
+    opcoes: ['Chipre', 'Creta', 'Malta', 'Patmos'],
+    correta: 2, // 'Malta'
+    referencia: 'Atos 28:1',
+    explicacao: 'Depois de salvos, descobriram que a ilha se chamava Malta, onde foram acolhidos com bondade.'
+  },
+  {
+    id: 5,
+    pergunta: 'Em qual monte Jesus costumava orar e passou seus momentos antes da crucificação?',
+    opcoes: ['Monte Sinai', 'Monte das Oliveiras', 'Monte Carmelo', 'Monte Tabor'],
+    correta: 1, // 'Monte das Oliveiras'
+    referencia: 'Lucas 22:39',
+    explicacao: 'Como de costume, Jesus foi para o monte das Oliveiras, e os seus discípulos o seguiram.'
+  }
+];
+
+/**
  * Utilitário de Metadados de Categoria
  */
 function getCategoryMeta(cat) {

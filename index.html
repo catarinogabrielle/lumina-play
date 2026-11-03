@@ -17,6 +17,7 @@
   <link rel="alternate icon" href="assets/icons/logo.svg" />
   <link rel="apple-touch-icon" href="assets/icons/lumina-icon.svg" />
   <link rel="mask-icon" href="assets/icons/lumina-icon.svg" color="#00f2fe" />
+  <link rel="manifest" href="manifest.json" />
 
   <!-- Tailwind CSS & Lucide Icons -->
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
@@ -114,6 +115,17 @@
             class="w-full pl-10 pr-4 py-2 rounded-xl bg-slate-900/90 border border-slate-700/80 focus:border-cyan-400 focus:outline-none text-xs sm:text-sm text-white placeholder-slate-400 transition"
           />
         </div>
+
+        <!-- Botão Instalar App (PWA) -->
+        <button
+          id="btnPwaInstall"
+          type="button"
+          class="hidden p-2.5 rounded-xl bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-400/40 transition flex items-center gap-1.5 text-xs font-gamer uppercase shrink-0"
+          title="Instalar Lumina Play como App"
+        >
+          <i data-lucide="Download" class="w-4 h-4"></i>
+          <span class="hidden xl:inline text-[11px] font-bold">Instalar App</span>
+        </button>
 
         <!-- Botão Adicionar Jogo / Gerador -->
         <button
@@ -293,6 +305,41 @@
       </div>
     </section>
 
+    <!-- DESAFIO BÍBLICO DIÁRIO & OFENSIVA DE FÉ (GAMIFICAÇÃO) -->
+    <section id="desafioDiarioSection" class="daily-challenge-box rounded-3xl p-6 sm:p-8 space-y-4 relative overflow-hidden">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-amber-400 shrink-0">
+            <i data-lucide="Flame" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h3 class="font-gamer font-bold text-base sm:text-lg text-white">Desafio Bíblico Diário</h3>
+              <span id="challengeRef" class="text-[10px] font-gamer uppercase px-2.5 py-0.5 rounded-full bg-cyan-500/15 text-cyan-300 border border-cyan-400/30">1 Samuel 17</span>
+            </div>
+            <p class="text-xs text-slate-400">Responda a pergunta do dia para manter sua Ofensiva de Fé ativa!</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2 self-start sm:self-center px-4 py-2 rounded-2xl bg-slate-950/80 border border-amber-400/30 backdrop-blur-md">
+          <i data-lucide="Flame" class="w-5 h-5 text-amber-400 fill-amber-400 animate-pulse"></i>
+          <div class="text-xs">
+            <span class="text-slate-400">Ofensiva de Fé:</span>
+            <span id="streakCount" class="font-gamer font-bold text-amber-300 ml-1 text-sm">0</span>
+            <span class="text-slate-400 text-[10px] ml-0.5">dias</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-3">
+        <p id="challengeQuestion" class="font-gamer text-sm sm:text-base font-semibold text-slate-100">Carregando pergunta de hoje...</p>
+        <div id="challengeOptions" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+          <!-- Opções geradas dinamicamente via JS -->
+        </div>
+        <div id="challengeFeedback" class="hidden p-3.5 rounded-2xl bg-slate-950/90 border border-slate-700/80 text-xs text-slate-300"></div>
+      </div>
+    </section>
+
     <!-- 2. CARROSSEL HORIZONTAL: "PASSE O MOUSE PARA VER O VÍDEO DO JOGO" -->
     <section class="space-y-4">
       <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
@@ -355,16 +402,35 @@
           </button>
         </div>
 
-        <!-- Controles Direitos: Ordenação -->
+        <!-- Controles Direitos: Plataformas, Ordenação & Alternador Grade/Lista -->
         <div class="flex flex-wrap items-center justify-between sm:justify-end gap-3">
+          
+          <!-- Filtro de Plataforma -->
+          <div class="flex items-center gap-1 bg-slate-950/80 p-1 rounded-xl border border-slate-800">
+            <button type="button" data-platform="all" class="platform-filter-btn px-2.5 py-1 rounded-lg text-[11px] font-gamer uppercase bg-indigo-500 text-white font-bold transition">Todos</button>
+            <button type="button" data-platform="Web" class="platform-filter-btn px-2.5 py-1 rounded-lg text-[11px] font-gamer uppercase bg-slate-900 text-slate-400 hover:text-white border border-slate-800 transition">🌐 Web</button>
+            <button type="button" data-platform="Android" class="platform-filter-btn px-2.5 py-1 rounded-lg text-[11px] font-gamer uppercase bg-slate-900 text-slate-400 hover:text-white border border-slate-800 transition">📱 Mobile</button>
+            <button type="button" data-platform="PC" class="platform-filter-btn px-2.5 py-1 rounded-lg text-[11px] font-gamer uppercase bg-slate-900 text-slate-400 hover:text-white border border-slate-800 transition">💻 PC</button>
+          </div>
+
           <div class="flex items-center gap-2">
-            <label for="catalogSortSelect" class="text-xs text-slate-400">Ordenar:</label>
+            <label for="catalogSortSelect" class="text-xs text-slate-400 hidden sm:inline">Ordenar:</label>
             <select id="catalogSortSelect" class="px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-200 focus:border-cyan-400 focus:outline-none">
               <option value="destaque">Destaques</option>
               <option value="avaliacao">Melhor Avaliação</option>
               <option value="recentes">Mais Recentes</option>
               <option value="az">Ordem Alfabética (A-Z)</option>
             </select>
+          </div>
+
+          <!-- Alternador de Visualização Grade / Lista -->
+          <div class="flex items-center gap-1 bg-slate-950 p-1 rounded-xl border border-slate-800">
+            <button id="btnViewGrid" type="button" class="p-1.5 rounded-lg bg-cyan-500 text-slate-950 transition" title="Visualização em Grade">
+              <i data-lucide="LayoutGrid" class="w-4 h-4"></i>
+            </button>
+            <button id="btnViewList" type="button" class="p-1.5 rounded-lg bg-slate-950 border border-slate-800 text-slate-400 hover:text-white transition" title="Visualização em Lista">
+              <i data-lucide="List" class="w-4 h-4"></i>
+            </button>
           </div>
         </div>
       </div>
@@ -437,11 +503,12 @@
   <div id="previewModal" class="modal-backdrop fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-xl flex items-center justify-center p-4 overflow-y-auto" role="dialog" aria-modal="true">
     <div class="modal-dialog glass-surface-elevated rounded-3xl max-w-3xl w-full overflow-hidden border border-cyan-400/40 shadow-2xl my-8">
       
-      <!-- Palco de Mídia do Modal: Vídeo ou Canvas 60fps -->
+      <!-- Palco de Mídia do Modal: Vídeo ou Canvas 60fps ou Player Embutido -->
       <div class="relative aspect-video bg-slate-950 overflow-hidden">
         <img id="modalCoverFallback" src="" alt="Capa" class="absolute inset-0 w-full h-full object-cover opacity-35" />
         <video id="modalVideoPlayer" class="absolute inset-0 w-full h-full object-cover hidden" muted loop playsinline controls></video>
         <canvas id="modalTrailerCanvas" class="absolute inset-0 w-full h-full"></canvas>
+        <iframe id="modalGameIframe" class="in-portal-player-frame absolute inset-0 hidden z-20" allow="fullscreen; autoplay"></iframe>
 
         <div class="absolute top-4 left-4 flex items-center gap-2 z-10">
           <span class="px-3 py-1 rounded-full bg-rose-600/90 text-white text-[11px] font-gamer uppercase tracking-wider flex items-center gap-1.5 shadow-lg">
@@ -450,7 +517,7 @@
           </span>
         </div>
 
-        <button id="btnClosePreviewModal" type="button" class="absolute top-4 right-4 z-10 p-2 rounded-xl bg-slate-950/80 hover:bg-rose-500 text-white border border-white/15 transition" title="Fechar (ESC)">
+        <button id="btnClosePreviewModal" type="button" class="absolute top-4 right-4 z-30 p-2 rounded-xl bg-slate-950/80 hover:bg-rose-500 text-white border border-white/15 transition" title="Fechar (ESC)">
           <i data-lucide="X" class="w-5 h-5"></i>
         </button>
       </div>
@@ -517,11 +584,31 @@
           </ul>
         </div>
 
+        <!-- Avaliação da Comunidade / Usuário -->
+        <div class="flex items-center justify-between p-3 rounded-2xl bg-slate-950/70 border border-white/5">
+          <div class="text-xs">
+            <span class="text-slate-300 font-medium">Sua Avaliação:</span>
+            <span class="text-slate-500 ml-1 hidden sm:inline">(clique para avaliar)</span>
+          </div>
+          <div id="modalStarRatingContainer" class="flex items-center gap-1">
+            <!-- Botões de estrelas interativos via JS -->
+          </div>
+        </div>
+
         <!-- Tags -->
         <div id="modalTagsList" class="flex flex-wrap gap-2 pt-1 border-t border-white/5"></div>
 
-        <!-- Botão Principal de Jogar / Abrir -->
-        <div class="pt-2 flex justify-end">
+        <!-- Botões de Ação do Modal -->
+        <div class="pt-2 flex flex-wrap items-center justify-between gap-3">
+          <button
+            id="btnToggleInPortalPlayer"
+            type="button"
+            class="px-5 py-3.5 rounded-2xl bg-slate-900 hover:bg-slate-800 text-cyan-300 border border-cyan-400/30 font-gamer font-bold text-xs uppercase tracking-wider flex items-center gap-2 transition"
+          >
+            <i data-lucide="Maximize" class="w-4 h-4 text-cyan-400"></i>
+            <span>Jogar no Portal</span>
+          </button>
+
           <a
             id="modalLaunchBtn"
             href="https://www.bible.com/pt"
@@ -530,7 +617,7 @@
             class="btn-launch px-8 py-3.5 rounded-2xl font-gamer font-bold text-sm text-white uppercase tracking-wider flex items-center gap-2.5 shadow-xl"
           >
             <i data-lucide="Play" class="w-4 h-4 fill-white"></i>
-            <span>Abrir Jogo / Aplicativo</span>
+            <span>Abrir em Nova Aba</span>
             <i data-lucide="ExternalLink" class="w-4 h-4"></i>
           </a>
         </div>
@@ -652,6 +739,28 @@
     <i id="toastIcon" data-lucide="CheckCircle2" class="w-5 h-5 text-cyan-400"></i>
     <span id="toastMessage" class="text-xs sm:text-sm font-medium text-white">Notificação do sistema</span>
   </div>
+
+  <!-- ===================================================================== -->
+  <!-- BARRA DE NAVEGAÇÃO INFERIOR PARA DISPOSITIVOS MÓVEIS (MOBILE DOCK)     -->
+  <!-- ===================================================================== -->
+  <nav class="mobile-bottom-nav" aria-label="Navegação Rápida Mobile">
+    <button type="button" data-mobile-target="inicio" class="mobile-nav-item is-active">
+      <i data-lucide="Compass" class="w-5 h-5 mb-1"></i>
+      <span>Início</span>
+    </button>
+    <button type="button" data-mobile-target="catalogo" class="mobile-nav-item">
+      <i data-lucide="Gamepad2" class="w-5 h-5 mb-1"></i>
+      <span>Jogos</span>
+    </button>
+    <button type="button" data-mobile-target="desafio" class="mobile-nav-item">
+      <i data-lucide="Flame" class="w-5 h-5 mb-1"></i>
+      <span>Desafio</span>
+    </button>
+    <button type="button" data-mobile-target="favoritos" class="mobile-nav-item">
+      <i data-lucide="Heart" class="w-5 h-5 mb-1"></i>
+      <span>Favoritos (<span id="mobileCountFavorites">0</span>)</span>
+    </button>
+  </nav>
 
   <!-- ===================================================================== -->
   <!-- SCRIPTS MODULARES JAVASCRIPT                                          -->

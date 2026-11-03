@@ -58,6 +58,22 @@ c:\projetos\Lumina Play\
 7. **Efeitos Sonoros Procedurais (Web Audio API)**:
    - Efeitos de hover, clique, abrir modal, favoritar e play com sintetizador Web Audio nativo e botão de mute com persistência.
 
+8. **PWA (Progressive Web App) & Instalação**:
+   - Suporte completo a instalação como aplicativo desktop ou mobile (`manifest.json` e `sw.js`).
+   - Botão dinâmico "Instalar App" no cabeçalho quando o navegador oferece suporte.
+
+9. **Desafio Bíblico Diário & Ofensiva de Fé (Gamificação)**:
+   - Quiz dinâmico com rotação diária de perguntas bíblicas, sistema de ofensiva (*streaks*) salvo no navegador e feedback com versículo.
+
+10. **Alternador de Visualização (Grade vs. Lista Estilo Steam)**:
+    - Botões para alternar instantaneamente entre a visualização de cards com vídeo ou tabela detalhada em linha.
+
+11. **Modo 'Jogar no Portal' (Embed Player)**:
+    - Opção dentro do modal de detalhes para carregar o jogo/app diretamente no portal com controle de tela cheia ou abrir em nova aba.
+
+12. **Barra de Navegação Inferior para Celulares (Mobile Dock)**:
+    - Navegação rápida fixa no rodapé para dispositivos móveis com acesso a Início, Jogos, Desafio e Favoritos.
+
 ---
 
 ## 🛠️ Como Adicionar um Novo Jogo ou App

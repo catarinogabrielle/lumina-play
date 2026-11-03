@@ -3,7 +3,8 @@
  * LUMINA PLAY - MAIN APPLICATION CONTROLLER
  * ==============================================================================
  * Gerenciamento de estado, Hero Carousel, Catálogo Dinâmico, Favoritos,
- * Modais interativos, Compartilhamento e Notificações Toast.
+ * Visualização em Grid/Lista, Desafio Bíblico Diário, Avaliação por Estrelas,
+ * Modais interativos, PWA e Notificações Toast.
  * ==============================================================================
  */
 
@@ -12,9 +13,11 @@
 
   // --- 1. ESTADO DA APLICAÇÃO ---
   let selectedCategory = 'all';
+  let selectedPlatform = 'all';
   let activeTag = null;
   let searchFilter = '';
   let sortMode = 'destaque';
+  let currentViewMode = 'grid'; // 'grid' | 'list'
 
   // Favoritos persistidos no localStorage
   let userFavorites = new Set();
@@ -25,6 +28,14 @@
     }
   } catch (e) {
     userFavorites = new Set();
+  }
+
+  // Avaliações de usuários no localStorage
+  let userRatings = {};
+  try {
+    userRatings = JSON.parse(localStorage.getItem('lumina_user_ratings') || '{}');
+  } catch (e) {
+    userRatings = {};
   }
 
   function saveFavorites() {
@@ -53,6 +64,10 @@
     const badge = document.getElementById('countFavorites');
     if (badge) {
       badge.textContent = userFavorites.size;
+    }
+    const mobileBadge = document.getElementById('mobileCountFavorites');
+    if (mobileBadge) {
+      mobileBadge.textContent = userFavorites.size;
     }
   }
 
@@ -261,6 +276,7 @@
     }
   }
 
+  // Card no Modo Grid (Padrão com Vídeo Preview)
   function createGameCardHtml(item, isCarousel = false) {
     const catMeta = getCategoryMeta(item.categoria);
     const isFav = userFavorites.has(item.id);
@@ -399,18 +415,83 @@
     `;
   }
 
+  // Card no Modo Lista (Estilo Tabela Steam / Epic Games)
+  function createGameListRowHtml(item) {
+    const catMeta = getCategoryMeta(item.categoria);
+    const isFav = userFavorites.has(item.id);
+
+    return `
+      <article
+        data-card-id="${item.id}"
+        class="store-card-list rounded-2xl p-3 sm:p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 group"
+      >
+        <div class="flex items-center gap-3.5 min-w-0">
+          <div class="w-24 h-16 sm:w-28 sm:h-18 rounded-xl overflow-hidden bg-slate-950 shrink-0 relative border border-white/10">
+            <img src="${item.imagemCapa}" alt="${item.titulo}" class="w-full h-full object-cover group-hover:scale-105 transition" />
+          </div>
+          <div class="min-w-0">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="px-2 py-0.5 rounded text-[10px] font-gamer uppercase ${catMeta.badgeClass}">
+                ${catMeta.label}
+              </span>
+              <span class="text-amber-400 font-bold text-xs">★ ${item.avaliacao}</span>
+              <span class="text-[10px] text-slate-500 hidden md:inline">• ${item.referenciaBiblica || ''}</span>
+            </div>
+            <h3 class="font-gamer text-sm sm:text-base font-bold text-white group-hover:text-cyan-300 transition truncate">
+              ${item.titulo}
+            </h3>
+            <p class="text-xs text-slate-400 truncate max-w-md">${item.subtitulo}</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2 self-end sm:self-center shrink-0">
+          <button
+            type="button"
+            data-fav-id="${item.id}"
+            class="btn-favorite p-2.5 rounded-xl bg-slate-900 border border-slate-700/80 text-slate-300 hover:text-white transition ${isFav ? 'is-favorited' : ''}"
+            title="${isFav ? 'Remover dos Favoritos' : 'Adicionar aos Favoritos'}"
+          >
+            <i data-lucide="Heart" class="w-4 h-4 ${isFav ? 'fill-rose-500 text-rose-500' : ''}"></i>
+          </button>
+
+          <button
+            type="button"
+            data-open-details="${item.id}"
+            class="btn-open-details p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-cyan-300 border border-slate-700/80 transition"
+            title="Ver Detalhes"
+          >
+            <i data-lucide="Maximize2" class="w-4 h-4"></i>
+          </button>
+
+          <a
+            href="${item.urlDestino}"
+            target="_blank"
+            rel="noopener noreferrer"
+            onclick="LuminaAudio.play('launch')"
+            class="btn-launch px-4 py-2.5 rounded-xl font-gamer font-bold text-xs text-white uppercase tracking-wider flex items-center gap-1.5"
+          >
+            <i data-lucide="Play" class="w-3.5 h-3.5 fill-white"></i>
+            <span>${item.botaoTexto || 'Jogar'}</span>
+          </a>
+        </div>
+      </article>
+    `;
+  }
+
   function wireCardInteractions(containerEl) {
     if (!containerEl) return;
 
-    // Hover Video Preview
-    containerEl.querySelectorAll('article[data-card-id]').forEach(cardEl => {
-      const id = cardEl.getAttribute('data-card-id');
-      const item = CATALOGO_JOGOS_E_APPS.find(x => x.id === id);
-      if (!item) return;
+    // Hover Video Preview (apenas para modo grid)
+    if (currentViewMode === 'grid') {
+      containerEl.querySelectorAll('article[data-card-id]').forEach(cardEl => {
+        const id = cardEl.getAttribute('data-card-id');
+        const item = CATALOGO_JOGOS_E_APPS.find(x => x.id === id);
+        if (!item) return;
 
-      cardEl.addEventListener('mouseenter', () => startCardHoverPreview(cardEl, item));
-      cardEl.addEventListener('mouseleave', () => stopCardHoverPreview(cardEl));
-    });
+        cardEl.addEventListener('mouseenter', () => startCardHoverPreview(cardEl, item));
+        cardEl.addEventListener('mouseleave', () => stopCardHoverPreview(cardEl));
+      });
+    }
 
     // Detalhes & Trailer Modal
     containerEl.querySelectorAll('.btn-open-details').forEach(btn => {
@@ -467,6 +548,14 @@
         return false;
       }
 
+      // Filtro por Plataforma
+      if (selectedPlatform !== 'all') {
+        const platforms = item.plataformas || [];
+        if (!platforms.some(p => p.toLowerCase().includes(selectedPlatform.toLowerCase()))) {
+          return false;
+        }
+      }
+
       // Filtro por Tag ativa
       if (activeTag && !(item.tags || []).includes(activeTag)) {
         return false;
@@ -501,7 +590,16 @@
     }
 
     if (empty) empty.classList.add('hidden');
-    grid.innerHTML = list.map(item => createGameCardHtml(item, false)).join('');
+
+    // Alternar classes do container de acordo com o modo de visualização
+    if (currentViewMode === 'list') {
+      grid.className = 'space-y-3';
+      grid.innerHTML = list.map(item => createGameListRowHtml(item)).join('');
+    } else {
+      grid.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6';
+      grid.innerHTML = list.map(item => createGameCardHtml(item, false)).join('');
+    }
+
     wireCardInteractions(grid);
     if (window.lucide) lucide.createIcons();
   }
@@ -541,6 +639,20 @@
     currentOpenGameId = gameId;
     const modal = document.getElementById('previewModal');
     const catMeta = getCategoryMeta(item.categoria);
+
+    // Reset do Player In-Portal
+    const iframeEl = document.getElementById('modalGameIframe');
+    const btnTogglePlayer = document.getElementById('btnToggleInPortalPlayer');
+    if (iframeEl) {
+      iframeEl.classList.add('hidden');
+      iframeEl.src = 'about:blank';
+    }
+    if (btnTogglePlayer) {
+      btnTogglePlayer.innerHTML = `
+        <i data-lucide="Maximize" class="w-4 h-4 text-cyan-400"></i>
+        <span>Jogar no Portal</span>
+      `;
+    }
 
     // Atualizar textos e dados
     const catBadge = document.getElementById('modalCategoryBadge');
@@ -609,6 +721,9 @@
       `).join('');
     }
 
+    // Renderizar Avaliação Interativa por Estrelas
+    renderModalStarRating(gameId);
+
     // Estado do botão de favoritar no modal
     updateModalFavoriteState(gameId);
 
@@ -638,6 +753,77 @@
     if (window.lucide) lucide.createIcons();
   }
 
+  function renderModalStarRating(gameId) {
+    const container = document.getElementById('modalStarRatingContainer');
+    if (!container) return;
+    const currentRating = userRatings[gameId] || 0;
+
+    container.innerHTML = [1, 2, 3, 4, 5].map(star => `
+      <button
+        type="button"
+        data-star-val="${star}"
+        class="star-rating-btn text-lg sm:text-xl font-bold ${star <= currentRating ? 'active' : ''}"
+        title="Avaliar com ${star} estrela(s)"
+      >
+        ★
+      </button>
+    `).join('');
+
+    container.querySelectorAll('.star-rating-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const star = parseInt(btn.getAttribute('data-star-val'), 10);
+        userRatings[gameId] = star;
+        try {
+          localStorage.setItem('lumina_user_ratings', JSON.stringify(userRatings));
+        } catch (e) {}
+        LuminaAudio.play('favorite');
+        renderModalStarRating(gameId);
+        showToast(`Você avaliou este jogo com ${star} estrela(s)!`, 'Star');
+      });
+    });
+  }
+
+  function toggleInPortalPlayer() {
+    if (!currentOpenGameId) return;
+    const item = CATALOGO_JOGOS_E_APPS.find(x => x.id === currentOpenGameId);
+    if (!item) return;
+
+    const videoEl = document.getElementById('modalVideoPlayer');
+    const canvasEl = document.getElementById('modalTrailerCanvas');
+    const iframeEl = document.getElementById('modalGameIframe');
+    const btnToggle = document.getElementById('btnToggleInPortalPlayer');
+
+    if (iframeEl && iframeEl.classList.contains('hidden')) {
+      if (videoEl) { videoEl.pause(); videoEl.classList.add('hidden'); }
+      if (canvasEl) canvasEl.classList.add('hidden');
+      iframeEl.src = item.urlDestino;
+      iframeEl.classList.remove('hidden');
+      if (btnToggle) {
+        btnToggle.innerHTML = `
+          <i data-lucide="Film" class="w-4 h-4 text-cyan-400"></i>
+          <span>Ver Trailer</span>
+        `;
+      }
+      LuminaAudio.play('launch');
+    } else if (iframeEl) {
+      iframeEl.classList.add('hidden');
+      iframeEl.src = 'about:blank';
+      if (btnToggle) {
+        btnToggle.innerHTML = `
+          <i data-lucide="Maximize" class="w-4 h-4 text-cyan-400"></i>
+          <span>Jogar no Portal</span>
+        `;
+      }
+      if (item.videoHoverUrl && item.videoHoverUrl.trim() !== '') {
+        if (videoEl) { videoEl.classList.remove('hidden'); videoEl.play().catch(() => {}); }
+      } else {
+        if (canvasEl) canvasEl.classList.remove('hidden');
+      }
+      LuminaAudio.play('click');
+    }
+    if (window.lucide) lucide.createIcons();
+  }
+
   function updateModalFavoriteState(gameId) {
     const modalFavBtn = document.getElementById('modalFavToggleBtn');
     if (!modalFavBtn) return;
@@ -661,13 +847,105 @@
     const videoEl = document.getElementById('modalVideoPlayer');
     if (videoEl) videoEl.pause();
 
+    const iframeEl = document.getElementById('modalGameIframe');
+    if (iframeEl) {
+      iframeEl.classList.add('hidden');
+      iframeEl.src = 'about:blank';
+    }
+
     if (modalTrailerController) {
       modalTrailerController.stop();
       modalTrailerController = null;
     }
   }
 
-  // --- 7. MODAL DE ADICIONAR JOGO & GERADOR DE CÓDIGO ---
+  // --- 7. DESAFIO BÍBLICO DIÁRIO & OFENSIVA DE FÉ (GAMIFICAÇÃO) ---
+  function initDailyChallenge() {
+    if (typeof DESAFIOS_DIARIOS === 'undefined' || DESAFIOS_DIARIOS.length === 0) return;
+
+    // Seleciona a pergunta de acordo com o dia do ano
+    const today = new Date();
+    const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+    const challenge = DESAFIOS_DIARIOS[dayOfYear % DESAFIOS_DIARIOS.length];
+
+    const questionEl = document.getElementById('challengeQuestion');
+    const optionsContainer = document.getElementById('challengeOptions');
+    const refEl = document.getElementById('challengeRef');
+    const feedbackEl = document.getElementById('challengeFeedback');
+    const streakEl = document.getElementById('streakCount');
+
+    let streak = parseInt(localStorage.getItem('lumina_streak_count') || '0', 10);
+    const lastAnsweredDate = localStorage.getItem('lumina_streak_date');
+    const todayStr = today.toDateString();
+
+    if (streakEl) streakEl.textContent = streak;
+    if (questionEl) questionEl.textContent = challenge.pergunta;
+    if (refEl) refEl.textContent = challenge.referencia;
+
+    const alreadyAnswered = localStorage.getItem('lumina_answered_' + todayStr);
+
+    if (optionsContainer) {
+      optionsContainer.innerHTML = challenge.opcoes.map((opt, idx) => `
+        <button
+          type="button"
+          data-opt-idx="${idx}"
+          class="challenge-opt-btn p-3 rounded-xl text-left text-xs sm:text-sm font-medium text-slate-200 flex items-center justify-between gap-2"
+          ${alreadyAnswered ? 'disabled' : ''}
+        >
+          <span>${opt}</span>
+          <span class="w-5 h-5 rounded-full border border-slate-700 flex items-center justify-center text-[10px] text-slate-400 font-mono">
+            ${String.fromCharCode(65 + idx)}
+          </span>
+        </button>
+      `).join('');
+
+      if (alreadyAnswered && feedbackEl) {
+        feedbackEl.innerHTML = `<span class="text-emerald-400 font-bold">✓ Desafio de hoje concluído!</span> ${challenge.explicacao}`;
+        feedbackEl.classList.remove('hidden');
+      }
+
+      optionsContainer.querySelectorAll('.challenge-opt-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const idx = parseInt(btn.getAttribute('data-opt-idx'), 10);
+          const isCorrect = idx === challenge.correta;
+
+          optionsContainer.querySelectorAll('.challenge-opt-btn').forEach((b, bIdx) => {
+            b.disabled = true;
+            if (bIdx === challenge.correta) {
+              b.classList.add('is-correct');
+            } else if (bIdx === idx && !isCorrect) {
+              b.classList.add('is-wrong');
+            }
+          });
+
+          if (isCorrect) {
+            LuminaAudio.play('favorite');
+            if (lastAnsweredDate !== todayStr) {
+              streak += 1;
+              localStorage.setItem('lumina_streak_count', streak);
+              localStorage.setItem('lumina_streak_date', todayStr);
+              if (streakEl) streakEl.textContent = streak;
+            }
+            showToast('Resposta Correta! Ofensiva de Fé +1!', 'Sparkles');
+          } else {
+            LuminaAudio.play('click');
+            showToast('Não foi dessa vez. Continue estudando a Palavra!', 'BookOpen');
+          }
+
+          localStorage.setItem('lumina_answered_' + todayStr, 'true');
+
+          if (feedbackEl) {
+            feedbackEl.innerHTML = isCorrect
+              ? `<span class="text-emerald-400 font-bold">Parabéns, resposta correta!</span> ${challenge.explicacao}`
+              : `<span class="text-rose-400 font-bold">Incorreto.</span> A resposta certa era "${challenge.opcoes[challenge.correta]}". ${challenge.explicacao}`;
+            feedbackEl.classList.remove('hidden');
+          }
+        });
+      });
+    }
+  }
+
+  // --- 8. MODAL DE ADICIONAR JOGO & GERADOR DE CÓDIGO ---
   function openAddGameModal() {
     LuminaAudio.play('modalOpen');
     const modal = document.getElementById('addGameModal');
@@ -730,7 +1008,7 @@
     }
   }
 
-  // --- 8. COMPARTILHAR JOGO ---
+  // --- 9. COMPARTILHAR JOGO ---
   async function shareCurrentGame() {
     if (!currentOpenGameId) return;
     const item = CATALOGO_JOGOS_E_APPS.find(x => x.id === currentOpenGameId);
@@ -746,11 +1024,8 @@
       try {
         await navigator.share(shareData);
         showToast('Compartilhado com sucesso!', 'Share2');
-      } catch (e) {
-        // Usuário cancelou ou navegador não suportou
-      }
+      } catch (e) {}
     } else {
-      // Fallback para cópia na área de transferência
       try {
         await navigator.clipboard.writeText(`${item.titulo} - ${item.urlDestino}`);
         showToast('Link copiado para a área de transferência!', 'Copy');
@@ -760,7 +1035,16 @@
     }
   }
 
-  // --- 9. BINDING DE TODOS OS EVENTOS DE INTERFACE ---
+  // --- 10. SUPORTE A PWA (INSTALAÇÃO) ---
+  let deferredPrompt = null;
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    const installBtn = document.getElementById('btnPwaInstall');
+    if (installBtn) installBtn.classList.remove('hidden');
+  });
+
+  // --- 11. BINDING DE TODOS OS EVENTOS DE INTERFACE ---
   function bindGlobalEvents() {
     // Hero Controls
     document.getElementById('btnHeroPrev')?.addEventListener('click', () => {
@@ -824,6 +1108,38 @@
       });
     });
 
+    // Filtros de Plataforma
+    document.querySelectorAll('.platform-filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        LuminaAudio.play('select');
+        selectedPlatform = btn.getAttribute('data-platform');
+        document.querySelectorAll('.platform-filter-btn').forEach(b => {
+          const isMatch = b.getAttribute('data-platform') === selectedPlatform;
+          b.className = isMatch
+            ? 'platform-filter-btn px-3 py-1 rounded-lg text-xs font-gamer uppercase bg-indigo-500 text-white font-bold transition'
+            : 'platform-filter-btn px-3 py-1 rounded-lg text-xs font-gamer uppercase bg-slate-900 text-slate-400 hover:text-white border border-slate-800 transition';
+        });
+        renderCatalogGrid();
+      });
+    });
+
+    // Alternador de Visualização (Grid vs Lista)
+    document.getElementById('btnViewGrid')?.addEventListener('click', () => {
+      LuminaAudio.play('click');
+      currentViewMode = 'grid';
+      document.getElementById('btnViewGrid').className = 'p-2 rounded-xl bg-cyan-500 text-slate-950 transition';
+      document.getElementById('btnViewList').className = 'p-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-400 hover:text-white transition';
+      renderCatalogGrid();
+    });
+
+    document.getElementById('btnViewList')?.addEventListener('click', () => {
+      LuminaAudio.play('click');
+      currentViewMode = 'list';
+      document.getElementById('btnViewList').className = 'p-2 rounded-xl bg-cyan-500 text-slate-950 transition';
+      document.getElementById('btnViewGrid').className = 'p-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-400 hover:text-white transition';
+      renderCatalogGrid();
+    });
+
     // Tag Banner Clear
     document.getElementById('btnClearActiveTag')?.addEventListener('click', () => {
       LuminaAudio.play('select');
@@ -874,6 +1190,9 @@
     // Modal Share Button
     document.getElementById('modalShareBtn')?.addEventListener('click', shareCurrentGame);
 
+    // Modal In-Portal Player Toggle
+    document.getElementById('btnToggleInPortalPlayer')?.addEventListener('click', toggleInPortalPlayer);
+
     // Add Game & Code Guide Modal
     document.getElementById('btnOpenAddGame')?.addEventListener('click', openAddGameModal);
     document.getElementById('btnCloseAddGameModal')?.addEventListener('click', closeAddGameModal);
@@ -898,7 +1217,40 @@
       }
     });
 
-    // Keyboard Shortcuts (Esc to close modals, Arrow keys for hero)
+    // PWA Install Button
+    document.getElementById('btnPwaInstall')?.addEventListener('click', async () => {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      const choice = await deferredPrompt.userChoice;
+      if (choice && choice.outcome === 'accepted') {
+        showToast('Lumina Play instalado como App!', 'Download');
+      }
+      deferredPrompt = null;
+      document.getElementById('btnPwaInstall')?.classList.add('hidden');
+    });
+
+    // Mobile Bottom Navigation Links
+    document.querySelectorAll('.mobile-nav-item').forEach(btn => {
+      btn.addEventListener('click', () => {
+        LuminaAudio.play('click');
+        const target = btn.getAttribute('data-mobile-target');
+        document.querySelectorAll('.mobile-nav-item').forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+
+        if (target === 'inicio') {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else if (target === 'catalogo') {
+          document.getElementById('catalogoCompleto')?.scrollIntoView({ behavior: 'smooth' });
+        } else if (target === 'favoritos') {
+          selectCategory('favoritos');
+          document.getElementById('catalogoCompleto')?.scrollIntoView({ behavior: 'smooth' });
+        } else if (target === 'desafio') {
+          document.getElementById('desafioDiarioSection')?.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Keyboard Shortcuts (Esc to close modals)
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         closeGameModal();
@@ -907,7 +1259,7 @@
     });
   }
 
-  // --- 10. INICIALIZAÇÃO NO CARREGAMENTO DA PÁGINA ---
+  // --- 12. INICIALIZAÇÃO NO CARREGAMENTO DA PÁGINA ---
   window.addEventListener('DOMContentLoaded', () => {
     // Sincronizar estado inicial do som
     const isSfx = LuminaAudio.isEnabled();
@@ -916,18 +1268,24 @@
     if (statusText) statusText.textContent = isSfx ? 'SFX ON' : 'SFX OFF';
     if (soundIcon) soundIcon.setAttribute('data-lucide', isSfx ? 'Volume2' : 'VolumeX');
 
-    // Inicializar carrosséis e catálogo
+    // Inicializar carrosséis, catálogo e desafio diário
     updateFavoriteCounters();
     setHeroSlide(0);
     startHeroAutoCycle();
     renderFeaturedCarousel();
     renderCatalogGrid();
+    initDailyChallenge();
 
     // Iniciar partículas do Hero
     LuminaCanvas.initHeroParticles('heroAmbientCanvas');
 
     // Conectar eventos
     bindGlobalEvents();
+
+    // Registrar Service Worker para PWA
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js').catch(() => {});
+    }
 
     // Renderizar ícones do Lucide
     if (window.lucide) {

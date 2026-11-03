@@ -18,6 +18,9 @@ const LuminaCanvas = (function () {
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
 
+    let mouseX = -9999;
+    let mouseY = -9999;
+
     function resize() {
       const rect = canvas.getBoundingClientRect();
       canvas.width = rect.width || 900;
@@ -26,7 +29,20 @@ const LuminaCanvas = (function () {
     resize();
     window.addEventListener('resize', resize);
 
-    const particles = Array.from({ length: 32 }, () => ({
+    const parentStage = canvas.parentElement;
+    if (parentStage) {
+      parentStage.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        mouseX = e.clientX - rect.left;
+        mouseY = e.clientY - rect.top;
+      });
+      parentStage.addEventListener('mouseleave', () => {
+        mouseX = -9999;
+        mouseY = -9999;
+      });
+    }
+
+    const particles = Array.from({ length: 36 }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
       vx: (Math.random() - 0.5) * 0.5,
@@ -41,6 +57,17 @@ const LuminaCanvas = (function () {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       for (const p of particles) {
+        // Gravitação sutil com o cursor do mouse
+        if (mouseX > 0 && mouseY > 0) {
+          const dx = mouseX - p.x;
+          const dy = mouseY - p.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 180 && dist > 10) {
+            p.x += (dx / dist) * 0.6;
+            p.y += (dy / dist) * 0.6;
+          }
+        }
+
         p.x += p.vx;
         p.y += p.vy;
 
