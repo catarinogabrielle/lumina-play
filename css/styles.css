@@ -84,6 +84,35 @@ body {
 }
 
 /* ==========================================================================
+   NAVBAR BRAND LOGO & GLOW
+   ========================================================================== */
+.brand-icon-wrapper {
+  position: relative;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+}
+
+.brand-icon-wrapper::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #00f2fe 0%, #4f46e5 50%, #d946ef 100%);
+  z-index: -1;
+  filter: blur(8px);
+  opacity: 0.45;
+  transition: opacity 0.35s ease, filter 0.35s ease;
+}
+
+.group:hover .brand-icon-wrapper {
+  transform: scale(1.08) rotate(-2deg);
+}
+
+.group:hover .brand-icon-wrapper::after {
+  opacity: 1;
+  filter: blur(14px);
+}
+
+/* ==========================================================================
    STORE CARD & VIDEO HOVER EFFECTS (STEAM / EPIC STORE STYLE)
    ========================================================================== */
 .store-card {
