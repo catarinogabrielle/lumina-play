@@ -58,22 +58,22 @@
   <!-- ===================================================================== -->
   <!-- BARRA DE NAVEGAÇÃO SUPERIOR (TOP NAVIGATION // ESPAÇOSA & MODERNA)    -->
   <!-- ===================================================================== -->
-  <header class="sticky top-0 z-40 glass-nav w-full px-4 sm:px-8 lg:px-12">
-    <div class="w-full max-w-[1560px] mx-auto h-20 flex items-center justify-between gap-6">
+  <header class="sticky top-0 z-40 glass-nav w-full px-3 sm:px-8 lg:px-12">
+    <div class="w-full max-w-[1560px] mx-auto h-16 sm:h-20 flex items-center justify-between gap-3 sm:gap-6">
       
       <!-- Lado Esquerdo: Identidade Visual & Logo -->
-      <a href="#topo" class="flex items-center gap-3.5 group shrink-0 whitespace-nowrap">
-        <div class="brand-icon-wrapper w-11 h-11 rounded-2xl bg-gradient-to-br from-cyan-400 via-indigo-500 to-purple-600 p-[2px] shadow-lg shadow-cyan-500/25 transition">
-          <div class="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center p-1.5 overflow-hidden">
+      <a href="#topo" class="flex items-center gap-2.5 sm:gap-3.5 group shrink-0 whitespace-nowrap">
+        <div class="brand-icon-wrapper w-9 h-9 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl bg-gradient-to-br from-cyan-400 via-indigo-500 to-purple-600 p-[2px] shadow-lg shadow-cyan-500/25 transition">
+          <div class="w-full h-full bg-slate-950 rounded-[10px] sm:rounded-[14px] flex items-center justify-center p-1 sm:p-1.5 overflow-hidden">
             <img src="assets/icons/lumina-icon.svg" alt="Lumina Play Logo" class="w-full h-full object-contain" />
           </div>
         </div>
-        <div class="flex items-center gap-2.5">
+        <div class="flex items-center gap-1.5 sm:gap-2.5">
           <div class="flex items-baseline">
-            <span class="font-gamer text-lg sm:text-xl font-black tracking-wider text-white">LUMINA</span>
-            <span class="font-gamer text-lg sm:text-xl font-black tracking-wider bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent ml-1">PLAY</span>
+            <span class="font-gamer text-base sm:text-xl font-black tracking-wider text-white">LUMINA</span>
+            <span class="font-gamer text-base sm:text-xl font-black tracking-wider bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent ml-1">PLAY</span>
           </div>
-          <span class="text-[9px] font-gamer uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-cyan-500/15 text-cyan-300 border border-cyan-400/30 font-bold hidden xl:inline-block">
+          <span class="text-[9px] font-gamer uppercase tracking-widest px-2 py-0.5 rounded-full bg-cyan-500/15 text-cyan-300 border border-cyan-400/30 font-bold hidden xl:inline-block">
             HUB
           </span>
         </div>
@@ -101,10 +101,10 @@
       </nav>
 
       <!-- Lado Direito: Busca, SFX, Instalação PWA & Botão Novo Jogo -->
-      <div class="flex items-center gap-3 shrink-0">
+      <div class="flex items-center gap-2 sm:gap-3 shrink-0">
         
-        <!-- Barra de Busca Expansiva com Atalho -->
-        <div class="relative w-36 sm:w-48 lg:w-56 focus-within:w-64 search-box-sleek rounded-2xl flex items-center transition-all duration-300">
+        <!-- Barra de Busca Desktop / Tablet -->
+        <div class="hidden sm:flex relative w-48 lg:w-56 focus-within:w-64 search-box-sleek rounded-2xl items-center transition-all duration-300">
           <i data-lucide="Search" class="w-4 h-4 text-slate-400 absolute left-3.5 pointer-events-none"></i>
           <input
             id="globalSearchInput"
@@ -116,6 +116,16 @@
             /
           </kbd>
         </div>
+
+        <!-- Botão Toggle de Busca no Mobile -->
+        <button
+          id="btnToggleMobileSearch"
+          type="button"
+          class="sm:hidden header-icon-btn"
+          title="Buscar Jogos"
+        >
+          <i data-lucide="Search" class="w-4 h-4 text-cyan-400"></i>
+        </button>
 
         <!-- Botão Instalar App (PWA) -->
         <button
@@ -142,7 +152,7 @@
         <button
           id="btnOpenAddGame"
           type="button"
-          class="btn-launch px-4 py-2.5 rounded-2xl text-xs font-gamer font-bold text-white uppercase tracking-wider flex items-center gap-1.5 shrink-0 shadow-lg whitespace-nowrap"
+          class="btn-launch p-2.5 sm:px-4 sm:py-2.5 rounded-xl sm:rounded-2xl text-xs font-gamer font-bold text-white uppercase tracking-wider flex items-center gap-1.5 shrink-0 shadow-lg whitespace-nowrap"
           title="Adicionar Jogo ou Gerar Código"
         >
           <i data-lucide="Plus" class="w-4 h-4"></i>
@@ -151,6 +161,19 @@
 
       </div>
 
+    </div>
+
+    <!-- Barra de Busca Expansível Exclusiva para Celulares -->
+    <div id="mobileSearchBar" class="sm:hidden">
+      <div class="relative w-full pb-3 pt-1">
+        <i data-lucide="Search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 -mt-1 pointer-events-none"></i>
+        <input
+          id="mobileSearchInput"
+          type="text"
+          placeholder="Buscar jogos, temas, livros..."
+          class="w-full pl-10 pr-4 py-2 rounded-xl bg-slate-900 border border-cyan-400/40 text-xs text-white placeholder-slate-400 focus:outline-none"
+        />
+      </div>
     </div>
   </header>
 
@@ -180,59 +203,59 @@
         <div class="absolute inset-0 bg-gradient-to-r from-[#060811]/95 via-[#060811]/50 to-transparent"></div>
 
         <!-- Badges Flutuantes do Topo -->
-        <div class="absolute top-5 left-5 right-5 flex items-center justify-between gap-2 z-10">
-          <div class="flex flex-wrap items-center gap-2">
-            <span id="heroCategoryPill" class="px-3 py-1 rounded-full text-xs font-gamer uppercase tracking-wider badge-biblico backdrop-blur-md">
+        <div class="absolute top-3 left-3 right-3 sm:top-5 sm:left-5 sm:right-5 flex items-center justify-between gap-2 z-10">
+          <div class="flex items-center gap-1.5 sm:gap-2">
+            <span id="heroCategoryPill" class="px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full text-[10px] sm:text-xs font-gamer uppercase tracking-wider badge-biblico backdrop-blur-md whitespace-nowrap">
               JOGO BÍBLICO DE AÇÃO
             </span>
-            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/20 text-amber-300 border border-amber-400/40 backdrop-blur-md flex items-center gap-1.5 badge-special">
+            <span class="hidden sm:inline-flex px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/20 text-amber-300 border border-amber-400/40 backdrop-blur-md items-center gap-1.5 badge-special whitespace-nowrap">
               <i data-lucide="Flame" class="w-3.5 h-3.5"></i>
               <span id="heroSpecialBadge">Destaque da Semana</span>
             </span>
           </div>
 
           <!-- Controles de Setas Anterior / Próximo -->
-          <div class="flex items-center gap-2">
-            <button id="btnHeroPrev" type="button" class="w-9 h-9 rounded-xl bg-slate-950/75 hover:bg-cyan-500 hover:text-slate-950 text-white border border-white/15 backdrop-blur-md flex items-center justify-center transition" title="Slide Anterior (Seta Esquerda)">
-              <i data-lucide="ChevronLeft" class="w-5 h-5"></i>
+          <div class="flex items-center gap-1.5 sm:gap-2">
+            <button id="btnHeroPrev" type="button" class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-slate-950/75 hover:bg-cyan-500 hover:text-slate-950 text-white border border-white/15 backdrop-blur-md flex items-center justify-center transition" title="Slide Anterior (Seta Esquerda)">
+              <i data-lucide="ChevronLeft" class="w-4 h-4 sm:w-5 sm:h-5"></i>
             </button>
-            <button id="btnHeroNext" type="button" class="w-9 h-9 rounded-xl bg-slate-950/75 hover:bg-cyan-500 hover:text-slate-950 text-white border border-white/15 backdrop-blur-md flex items-center justify-center transition" title="Próximo Slide (Seta Direita)">
-              <i data-lucide="ChevronRight" class="w-5 h-5"></i>
+            <button id="btnHeroNext" type="button" class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-slate-950/75 hover:bg-cyan-500 hover:text-slate-950 text-white border border-white/15 backdrop-blur-md flex items-center justify-center transition" title="Próximo Slide (Seta Direita)">
+              <i data-lucide="ChevronRight" class="w-4 h-4 sm:w-5 sm:h-5"></i>
             </button>
           </div>
         </div>
 
         <!-- Textos e Ações Principais do Slide -->
-        <div class="relative z-10 p-6 sm:p-10 max-w-2xl space-y-4">
-          <div class="flex flex-wrap items-center gap-3 text-xs text-slate-300">
-            <span id="heroRating" class="flex items-center gap-1 text-amber-400 font-bold">
+        <div class="relative z-10 p-4 sm:p-8 lg:p-10 max-w-2xl space-y-3 sm:space-y-4">
+          <div class="flex flex-wrap items-center gap-2 sm:gap-3 text-xs text-slate-300">
+            <span id="heroRating" class="flex items-center gap-1 text-amber-400 font-bold text-xs">
               ★ 4.9 (2.4k avaliações)
             </span>
+            <span class="hidden sm:inline">•</span>
+            <span class="text-cyan-300 font-medium hidden sm:inline">Online & 100% Gratuito</span>
             <span>•</span>
-            <span class="text-cyan-300 font-medium">Online & 100% Gratuito</span>
-            <span>•</span>
-            <span id="heroAge" class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[11px] font-bold">Classificação: Livre</span>
+            <span id="heroAge" class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[10px] sm:text-[11px] font-bold">Livre</span>
           </div>
 
-          <h1 id="heroTitle" class="font-gamer text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-none">
+          <h1 id="heroTitle" class="font-gamer text-xl sm:text-3xl lg:text-5xl font-black text-white tracking-tight leading-tight sm:leading-none">
             CRÔNICAS DE DAVI: VALE DE ELÁ
           </h1>
 
-          <p id="heroDescription" class="text-slate-200 text-sm sm:text-base leading-relaxed line-clamp-3">
+          <p id="heroDescription" class="text-slate-200 text-xs sm:text-sm lg:text-base leading-relaxed line-clamp-2 sm:line-clamp-3">
             Viva a jornada épica do jovem pastor de Belém até o confronto histórico contra Golias. Desafios de fé, mira estratégica com a funda radiante e trilha sonora imersiva.
           </p>
 
           <!-- Tags Rápidas -->
-          <div id="heroTags" class="flex flex-wrap gap-2 pt-1"></div>
+          <div id="heroTags" class="flex flex-wrap gap-1.5 sm:gap-2 pt-1"></div>
 
           <!-- Botões de Ação do Hero -->
-          <div class="pt-3 flex flex-wrap items-center gap-3">
+          <div class="pt-2 sm:pt-3 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3">
             <a
               id="heroLaunchLink"
               href="https://www.bible.com/pt"
               target="_blank"
               rel="noopener noreferrer"
-              class="btn-launch px-6 py-3.5 rounded-2xl font-gamer font-bold text-xs sm:text-sm text-white uppercase tracking-wider flex items-center gap-2.5"
+              class="btn-launch px-6 py-3 rounded-xl sm:rounded-2xl font-gamer font-bold text-xs sm:text-sm text-white uppercase tracking-wider flex items-center justify-center gap-2.5"
             >
               <i data-lucide="Play" class="w-4 h-4 fill-white"></i>
               <span id="heroLaunchBtnText">Jogar Agora</span>
@@ -242,7 +265,7 @@
             <button
               id="btnHeroTrailer"
               type="button"
-              class="px-5 py-3.5 rounded-2xl bg-slate-900/85 hover:bg-slate-800 text-white border border-white/15 backdrop-blur-md font-semibold text-xs sm:text-sm flex items-center gap-2 transition"
+              class="px-5 py-3 rounded-xl sm:rounded-2xl bg-slate-900/85 hover:bg-slate-800 text-white border border-white/15 backdrop-blur-md font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 transition"
             >
               <i data-lucide="Film" class="w-4 h-4 text-cyan-400"></i>
               <span>Ver Preview & Detalhes</span>
@@ -264,44 +287,44 @@
     </section>
 
     <!-- BANNER DE DESTAQUES & MÉTRICAS (SOCIAL PROOF) -->
-    <section class="grid grid-cols-2 md:grid-cols-4 gap-4">
-      <div class="glass-surface rounded-2xl p-4 sm:p-5 flex items-center gap-3.5 border-l-4 border-l-cyan-400">
-        <div class="p-2.5 rounded-xl bg-cyan-400/10 text-cyan-400 shrink-0">
-          <i data-lucide="Gamepad2" class="w-6 h-6"></i>
+    <section class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+      <div class="glass-surface rounded-2xl p-3.5 sm:p-5 flex items-center gap-2.5 sm:gap-3.5 border-l-4 border-l-cyan-400">
+        <div class="p-2 sm:p-2.5 rounded-xl bg-cyan-400/10 text-cyan-400 shrink-0">
+          <i data-lucide="Gamepad2" class="w-5 h-5 sm:w-6 sm:h-6"></i>
         </div>
-        <div>
-          <div class="font-gamer font-bold text-base sm:text-lg text-white">100% Free</div>
-          <div class="text-[11px] sm:text-xs text-slate-400">Acesso livre e sem travas</div>
-        </div>
-      </div>
-
-      <div class="glass-surface rounded-2xl p-4 sm:p-5 flex items-center gap-3.5 border-l-4 border-l-purple-400">
-        <div class="p-2.5 rounded-xl bg-purple-400/10 text-purple-400 shrink-0">
-          <i data-lucide="Users" class="w-6 h-6"></i>
-        </div>
-        <div>
-          <div class="font-gamer font-bold text-base sm:text-lg text-white">+10.000</div>
-          <div class="text-[11px] sm:text-xs text-slate-400">Jogadores & Leitores</div>
+        <div class="min-w-0">
+          <div class="font-gamer font-bold text-sm sm:text-lg text-white truncate">100% Free</div>
+          <div class="text-[10px] sm:text-xs text-slate-400 truncate">Acesso livre</div>
         </div>
       </div>
 
-      <div class="glass-surface rounded-2xl p-4 sm:p-5 flex items-center gap-3.5 border-l-4 border-l-emerald-400">
-        <div class="p-2.5 rounded-xl bg-emerald-400/10 text-emerald-400 shrink-0">
-          <i data-lucide="BookCheck" class="w-6 h-6"></i>
+      <div class="glass-surface rounded-2xl p-3.5 sm:p-5 flex items-center gap-2.5 sm:gap-3.5 border-l-4 border-l-purple-400">
+        <div class="p-2 sm:p-2.5 rounded-xl bg-purple-400/10 text-purple-400 shrink-0">
+          <i data-lucide="Users" class="w-5 h-5 sm:w-6 sm:h-6"></i>
         </div>
-        <div>
-          <div class="font-gamer font-bold text-base sm:text-lg text-white">Fiel à Bíblia</div>
-          <div class="text-[11px] sm:text-xs text-slate-400">Escrituras e arqueologia</div>
+        <div class="min-w-0">
+          <div class="font-gamer font-bold text-sm sm:text-lg text-white truncate">+10.000</div>
+          <div class="text-[10px] sm:text-xs text-slate-400 truncate">Jogadores</div>
         </div>
       </div>
 
-      <div class="glass-surface rounded-2xl p-4 sm:p-5 flex items-center gap-3.5 border-l-4 border-l-amber-400">
-        <div class="p-2.5 rounded-xl bg-amber-400/10 text-amber-400 shrink-0">
-          <i data-lucide="Smartphone" class="w-6 h-6"></i>
+      <div class="glass-surface rounded-2xl p-3.5 sm:p-5 flex items-center gap-2.5 sm:gap-3.5 border-l-4 border-l-emerald-400">
+        <div class="p-2 sm:p-2.5 rounded-xl bg-emerald-400/10 text-emerald-400 shrink-0">
+          <i data-lucide="BookCheck" class="w-5 h-5 sm:w-6 sm:h-6"></i>
         </div>
-        <div>
-          <div class="font-gamer font-bold text-base sm:text-lg text-white">Multiplataforma</div>
-          <div class="text-[11px] sm:text-xs text-slate-400">PC, Web & Mobile</div>
+        <div class="min-w-0">
+          <div class="font-gamer font-bold text-sm sm:text-lg text-white truncate">Fiel à Bíblia</div>
+          <div class="text-[10px] sm:text-xs text-slate-400 truncate">Escrituras</div>
+        </div>
+      </div>
+
+      <div class="glass-surface rounded-2xl p-3.5 sm:p-5 flex items-center gap-2.5 sm:gap-3.5 border-l-4 border-l-amber-400">
+        <div class="p-2 sm:p-2.5 rounded-xl bg-amber-400/10 text-amber-400 shrink-0">
+          <i data-lucide="Smartphone" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+        </div>
+        <div class="min-w-0">
+          <div class="font-gamer font-bold text-sm sm:text-lg text-white truncate">Multiplataforma</div>
+          <div class="text-[10px] sm:text-xs text-slate-400 truncate">PC & Mobile</div>
         </div>
       </div>
     </section>
@@ -342,69 +365,69 @@
     </section>
 
     <!-- 2. CARROSSEL HORIZONTAL: "PASSE O MOUSE PARA VER O VÍDEO DO JOGO" -->
-    <section class="space-y-4">
-      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+    <section class="space-y-3 sm:space-y-4">
+      <div class="flex items-center justify-between gap-3">
         <div>
-          <div class="inline-flex items-center gap-2 text-xs font-gamer uppercase tracking-widest text-cyan-400 mb-1">
+          <div class="inline-flex items-center gap-2 text-[10px] sm:text-xs font-gamer uppercase tracking-widest text-cyan-400 mb-0.5 sm:mb-1">
             <span class="w-2 h-2 rounded-full bg-cyan-400 pulse-indicator"></span>
-            <span>EXPERIÊNCIA INTERATIVA AO VIVO</span>
+            <span>EXPERIÊNCIA INTERATIVA</span>
           </div>
-          <h2 class="font-gamer text-xl sm:text-2xl font-extrabold text-white flex items-center gap-2.5">
+          <h2 class="font-gamer text-lg sm:text-2xl font-extrabold text-white flex items-center gap-2.5">
             <span>Carrossel em Alta</span>
-            <span class="text-xs font-sans font-normal text-slate-400 bg-slate-900/90 border border-slate-800 px-3 py-1 rounded-full hidden sm:inline-block">
-              🎬 Passe o mouse sobre qualquer jogo para ver a gameplay em 60 FPS
+            <span class="text-xs font-sans font-normal text-slate-400 bg-slate-900/90 border border-slate-800 px-3 py-1 rounded-full hidden lg:inline-block">
+              🎬 Gameplay em 60 FPS ao vivo
             </span>
           </h2>
         </div>
 
         <!-- Botões de Rolar o Carrossel -->
-        <div class="flex items-center gap-2 self-end">
-          <button id="btnCarouselLeft" type="button" class="p-2.5 rounded-xl glass-surface hover:border-cyan-400/60 text-slate-300 hover:text-white transition" title="Rolar para a esquerda">
+        <div class="flex items-center gap-1.5 sm:gap-2">
+          <button id="btnCarouselLeft" type="button" class="p-2 sm:p-2.5 rounded-xl glass-surface hover:border-cyan-400/60 text-slate-300 hover:text-white transition" title="Rolar para a esquerda">
             <i data-lucide="ArrowLeft" class="w-4 h-4"></i>
           </button>
-          <button id="btnCarouselRight" type="button" class="p-2.5 rounded-xl glass-surface hover:border-cyan-400/60 text-slate-300 hover:text-white transition" title="Rolar para a direita">
+          <button id="btnCarouselRight" type="button" class="p-2 sm:p-2.5 rounded-xl glass-surface hover:border-cyan-400/60 text-slate-300 hover:text-white transition" title="Rolar para a direita">
             <i data-lucide="ArrowRight" class="w-4 h-4"></i>
           </button>
         </div>
       </div>
 
       <!-- Trilho de Rolagem Horizontal -->
-      <div id="featuredCarouselTrack" class="flex gap-5 overflow-x-auto no-scrollbar pb-4 pt-1 scroll-smooth">
+      <div id="featuredCarouselTrack" class="flex gap-4 sm:gap-5 overflow-x-auto no-scrollbar pb-3 pt-1 scroll-smooth">
         <!-- Preenchido via JS -->
       </div>
     </section>
 
     <!-- 3. CATÁLOGO COMPLETO COM FILTROS, FAVORITOS E CARDS COM VÍDEO -->
-    <section id="catalogoCompleto" class="space-y-6">
+    <section id="catalogoCompleto" class="space-y-4 sm:space-y-6">
       
       <!-- Barra de Filtros de Categoria -->
-      <div class="glass-surface rounded-2xl p-4 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
+      <div class="glass-surface rounded-2xl p-3 sm:p-4 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 sm:gap-4">
         
         <!-- Pílulas de Categoria -->
-        <div id="catalogCategoryBar" class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 lg:pb-0" role="tablist">
-          <button type="button" data-cat="all" class="cat-pill px-4 py-2 rounded-xl text-xs font-gamer uppercase tracking-wider bg-cyan-500 text-slate-950 font-bold shadow-lg shadow-cyan-500/20 whitespace-nowrap transition">
+        <div id="catalogCategoryBar" class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 lg:pb-0 -mx-1 px-1" role="tablist">
+          <button type="button" data-cat="all" class="cat-pill px-3.5 sm:px-4 py-2 rounded-xl text-xs font-gamer uppercase tracking-wider bg-cyan-500 text-slate-950 font-bold shadow-lg shadow-cyan-500/20 whitespace-nowrap shrink-0 transition">
             🌟 Todos (<span id="countAll">0</span>)
           </button>
-          <button type="button" data-cat="biblico" class="cat-pill px-4 py-2 rounded-xl text-xs font-gamer uppercase tracking-wider bg-slate-900/90 text-slate-300 hover:text-white border border-slate-800 whitespace-nowrap transition">
+          <button type="button" data-cat="biblico" class="cat-pill px-3.5 sm:px-4 py-2 rounded-xl text-xs font-gamer uppercase tracking-wider bg-slate-900/90 text-slate-300 hover:text-white border border-slate-800 whitespace-nowrap shrink-0 transition">
             ⚔️ Jogos Bíblicos
           </button>
-          <button type="button" data-cat="educacional" class="cat-pill px-4 py-2 rounded-xl text-xs font-gamer uppercase tracking-wider bg-slate-900/90 text-slate-300 hover:text-white border border-slate-800 whitespace-nowrap transition">
+          <button type="button" data-cat="educacional" class="cat-pill px-3.5 sm:px-4 py-2 rounded-xl text-xs font-gamer uppercase tracking-wider bg-slate-900/90 text-slate-300 hover:text-white border border-slate-800 whitespace-nowrap shrink-0 transition">
             🧩 Jogos Educacionais
           </button>
-          <button type="button" data-cat="leitura" class="cat-pill px-4 py-2 rounded-xl text-xs font-gamer uppercase tracking-wider bg-slate-900/90 text-slate-300 hover:text-white border border-slate-800 whitespace-nowrap transition">
+          <button type="button" data-cat="leitura" class="cat-pill px-3.5 sm:px-4 py-2 rounded-xl text-xs font-gamer uppercase tracking-wider bg-slate-900/90 text-slate-300 hover:text-white border border-slate-800 whitespace-nowrap shrink-0 transition">
             📖 Leitura Bíblica
           </button>
-          <button type="button" data-cat="devocional" class="cat-pill px-4 py-2 rounded-xl text-xs font-gamer uppercase tracking-wider bg-slate-900/90 text-slate-300 hover:text-white border border-slate-800 whitespace-nowrap transition">
+          <button type="button" data-cat="devocional" class="cat-pill px-3.5 sm:px-4 py-2 rounded-xl text-xs font-gamer uppercase tracking-wider bg-slate-900/90 text-slate-300 hover:text-white border border-slate-800 whitespace-nowrap shrink-0 transition">
             🔥 Devocionais
           </button>
-          <button type="button" data-cat="favoritos" class="cat-pill px-4 py-2 rounded-xl text-xs font-gamer uppercase tracking-wider bg-slate-900/90 text-rose-300 hover:text-white border border-slate-800 whitespace-nowrap transition flex items-center gap-1.5">
+          <button type="button" data-cat="favoritos" class="cat-pill px-3.5 sm:px-4 py-2 rounded-xl text-xs font-gamer uppercase tracking-wider bg-slate-900/90 text-rose-300 hover:text-white border border-slate-800 whitespace-nowrap shrink-0 transition flex items-center gap-1.5">
             <i data-lucide="Heart" class="w-3.5 h-3.5 fill-rose-500 text-rose-500"></i>
             <span>Favoritos (<span id="countFavorites">0</span>)</span>
           </button>
         </div>
 
         <!-- Controles Direitos: Plataformas, Ordenação & Alternador Grade/Lista -->
-        <div class="flex flex-wrap items-center justify-between sm:justify-end gap-3">
+        <div class="flex flex-wrap items-center justify-between sm:justify-end gap-2.5 sm:gap-3">
           
           <!-- Filtro de Plataforma -->
           <div class="flex items-center gap-1 bg-slate-950/80 p-1 rounded-xl border border-slate-800">
@@ -416,7 +439,7 @@
 
           <div class="flex items-center gap-2">
             <label for="catalogSortSelect" class="text-xs text-slate-400 hidden sm:inline">Ordenar:</label>
-            <select id="catalogSortSelect" class="px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-200 focus:border-cyan-400 focus:outline-none">
+            <select id="catalogSortSelect" class="px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-200 focus:border-cyan-400 focus:outline-none">
               <option value="destaque">Destaques</option>
               <option value="avaliacao">Melhor Avaliação</option>
               <option value="recentes">Mais Recentes</option>
@@ -470,10 +493,10 @@
   <!-- ===================================================================== -->
   <!-- RODAPÉ (FOOTER)                                                       -->
   <!-- ===================================================================== -->
-  <footer class="mt-20 border-t border-white/10 bg-slate-950/90 py-10 px-4 sm:px-6 lg:px-10 text-xs text-slate-400">
+  <footer class="mt-14 sm:mt-20 border-t border-white/10 bg-slate-950/90 py-8 sm:py-10 px-4 sm:px-6 lg:px-10 text-xs text-slate-400">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
       <div class="flex items-center gap-3">
-        <div class="brand-icon-wrapper w-8 h-8 rounded-xl bg-gradient-to-br from-cyan-400 to-indigo-500 p-[1.5px]">
+        <div class="brand-icon-wrapper w-8 h-8 rounded-xl bg-gradient-to-br from-cyan-400 to-indigo-500 p-[1.5px] shrink-0">
           <div class="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center p-0.5 overflow-hidden">
             <img src="assets/icons/lumina-icon.svg" alt="Lumina Play" class="w-full h-full object-contain" />
           </div>
@@ -484,7 +507,7 @@
         </div>
       </div>
 
-      <div class="flex flex-wrap items-center gap-4 text-xs text-slate-400">
+      <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-xs text-slate-400">
         <span>🎮 60 FPS Interactive Live Hover</span>
         <span>•</span>
         <span>🎵 Sintetizador Web Audio</span>
@@ -501,44 +524,44 @@
   <!-- ===================================================================== -->
   <!-- MODAL 1: FICHA TÉCNICA, TRAILER & DETALHES DO JOGO                    -->
   <!-- ===================================================================== -->
-  <div id="previewModal" class="modal-backdrop fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-xl flex items-center justify-center p-4 overflow-y-auto" role="dialog" aria-modal="true">
-    <div class="modal-dialog glass-surface-elevated rounded-3xl max-w-3xl w-full overflow-hidden border border-cyan-400/40 shadow-2xl my-8">
+  <div id="previewModal" class="modal-backdrop fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-xl flex items-center justify-center p-2 sm:p-4 overflow-y-auto" role="dialog" aria-modal="true">
+    <div class="modal-dialog glass-surface-elevated rounded-2xl sm:rounded-3xl max-w-3xl w-full overflow-hidden border border-cyan-400/40 shadow-2xl my-auto max-h-[92vh] flex flex-col">
       
-      <!-- Palco de Mídia do Modal: Vídeo ou Canvas 60fps ou Player Embutido -->
-      <div class="relative aspect-video bg-slate-950 overflow-hidden">
+      <!-- Palco de Mídia do Modal: Vídeo ou Canvas 60fps ou Player Embutido (shrink-0) -->
+      <div class="relative aspect-video max-h-[35vh] sm:max-h-[42vh] bg-slate-950 overflow-hidden shrink-0">
         <img id="modalCoverFallback" src="" alt="Capa" class="absolute inset-0 w-full h-full object-cover opacity-35" />
         <video id="modalVideoPlayer" class="absolute inset-0 w-full h-full object-cover hidden" muted loop playsinline controls></video>
         <canvas id="modalTrailerCanvas" class="absolute inset-0 w-full h-full"></canvas>
         <iframe id="modalGameIframe" class="in-portal-player-frame absolute inset-0 hidden z-20" allow="fullscreen; autoplay"></iframe>
 
-        <div class="absolute top-4 left-4 flex items-center gap-2 z-10">
-          <span class="px-3 py-1 rounded-full bg-rose-600/90 text-white text-[11px] font-gamer uppercase tracking-wider flex items-center gap-1.5 shadow-lg">
-            <span class="w-2 h-2 rounded-full bg-white animate-ping"></span>
-            TRAILER / GAMEPLAY PREVIEW
+        <div class="absolute top-3 left-3 sm:top-4 sm:left-4 flex items-center gap-2 z-10">
+          <span class="px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-rose-600/90 text-white text-[10px] sm:text-[11px] font-gamer uppercase tracking-wider flex items-center gap-1.5 shadow-lg">
+            <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-white animate-ping"></span>
+            TRAILER / GAMEPLAY
           </span>
         </div>
 
-        <button id="btnClosePreviewModal" type="button" class="absolute top-4 right-4 z-30 p-2 rounded-xl bg-slate-950/80 hover:bg-rose-500 text-white border border-white/15 transition" title="Fechar (ESC)">
-          <i data-lucide="X" class="w-5 h-5"></i>
+        <button id="btnClosePreviewModal" type="button" class="absolute top-3 right-3 sm:top-4 sm:right-4 z-30 p-2 rounded-xl bg-slate-950/80 hover:bg-rose-500 text-white border border-white/15 transition" title="Fechar (ESC)">
+          <i data-lucide="X" class="w-4 h-4 sm:w-5 sm:h-5"></i>
         </button>
       </div>
 
-      <!-- Corpo de Detalhes do Modal -->
-      <div class="p-6 sm:p-8 space-y-6">
-        <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+      <!-- Corpo de Detalhes do Modal (Scrollable flex-1) -->
+      <div class="overflow-y-auto flex-1 p-4 sm:p-8 space-y-4 sm:space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3 sm:gap-4">
           <div class="space-y-1">
-            <span id="modalCategoryBadge" class="inline-block px-3 py-0.5 rounded-full text-[11px] font-gamer uppercase badge-biblico mb-1">
+            <span id="modalCategoryBadge" class="inline-block px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-gamer uppercase badge-biblico mb-0.5 sm:mb-1">
               CATEGORIA
             </span>
-            <h3 id="modalTitle" class="font-gamer text-2xl sm:text-3xl font-extrabold text-white">Título do Jogo</h3>
-            <p id="modalSubtitle" class="text-sm font-medium text-cyan-300">Gênero & Subtítulo</p>
+            <h3 id="modalTitle" class="font-gamer text-xl sm:text-3xl font-extrabold text-white leading-tight">Título do Jogo</h3>
+            <p id="modalSubtitle" class="text-xs sm:text-sm font-medium text-cyan-300">Gênero & Subtítulo</p>
           </div>
 
           <div class="flex items-center gap-2 shrink-0">
             <button
               id="modalFavToggleBtn"
               type="button"
-              class="px-4 py-3 rounded-2xl bg-slate-900/80 hover:bg-slate-800 border border-white/15 text-slate-300 font-medium text-xs sm:text-sm flex items-center gap-2 transition"
+              class="px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl sm:rounded-2xl bg-slate-900/80 hover:bg-slate-800 border border-white/15 text-slate-300 font-medium text-xs sm:text-sm flex items-center gap-2 transition"
             >
               <i data-lucide="Heart" class="w-4 h-4"></i>
               <span>Favoritar</span>
@@ -547,7 +570,7 @@
             <button
               id="modalShareBtn"
               type="button"
-              class="p-3 rounded-2xl bg-slate-900/80 hover:bg-slate-800 border border-white/15 text-cyan-300 transition"
+              class="p-2.5 sm:p-3 rounded-xl sm:rounded-2xl bg-slate-900/80 hover:bg-slate-800 border border-white/15 text-cyan-300 transition"
               title="Compartilhar Link do Jogo"
             >
               <i data-lucide="Share2" class="w-4 h-4"></i>
@@ -556,13 +579,13 @@
         </div>
 
         <!-- Metadados Rápidos: Avaliação, Referência Bíblica e Plataformas -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 rounded-2xl bg-slate-950/60 border border-white/5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-slate-950/60 border border-white/5">
           <div class="flex items-center gap-2 text-xs">
             <span class="text-amber-400 font-bold" id="modalRating">★ 4.9</span>
             <span class="text-slate-500">•</span>
-            <span class="text-slate-300 flex items-center gap-1">
-              <i data-lucide="BookOpen" class="w-3.5 h-3.5 text-cyan-400"></i>
-              <span id="modalRefBiblica">1 Samuel 17</span>
+            <span class="text-slate-300 flex items-center gap-1 truncate">
+              <i data-lucide="BookOpen" class="w-3.5 h-3.5 text-cyan-400 shrink-0"></i>
+              <span id="modalRefBiblica" class="truncate">1 Samuel 17</span>
             </span>
           </div>
 
@@ -572,13 +595,13 @@
         </div>
 
         <!-- Descrição Completa -->
-        <div class="space-y-2">
+        <div class="space-y-1.5">
           <h4 class="font-gamer text-xs uppercase tracking-wider text-slate-400">Sobre a Experiência</h4>
-          <p id="modalDescription" class="text-slate-300 text-sm leading-relaxed"></p>
+          <p id="modalDescription" class="text-slate-300 text-xs sm:text-sm leading-relaxed"></p>
         </div>
 
         <!-- Lista de Recursos & Diferenciais -->
-        <div class="space-y-2">
+        <div class="space-y-1.5">
           <h4 class="font-gamer text-xs uppercase tracking-wider text-slate-400">Principais Destaques</h4>
           <ul id="modalFeatures" class="grid grid-cols-1 sm:grid-cols-2 gap-2">
             <!-- Recursos inseridos via JS -->
@@ -586,7 +609,7 @@
         </div>
 
         <!-- Avaliação da Comunidade / Usuário -->
-        <div class="flex items-center justify-between p-3 rounded-2xl bg-slate-950/70 border border-white/5">
+        <div class="flex items-center justify-between p-3 rounded-xl sm:rounded-2xl bg-slate-950/70 border border-white/5">
           <div class="text-xs">
             <span class="text-slate-300 font-medium">Sua Avaliação:</span>
             <span class="text-slate-500 ml-1 hidden sm:inline">(clique para avaliar)</span>
@@ -597,14 +620,14 @@
         </div>
 
         <!-- Tags -->
-        <div id="modalTagsList" class="flex flex-wrap gap-2 pt-1 border-t border-white/5"></div>
+        <div id="modalTagsList" class="flex flex-wrap gap-1.5 sm:gap-2 pt-1 border-t border-white/5"></div>
 
         <!-- Botões de Ação do Modal -->
-        <div class="pt-2 flex flex-wrap items-center justify-between gap-3">
+        <div class="pt-3 border-t border-white/10 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 sm:gap-3">
           <button
             id="btnToggleInPortalPlayer"
             type="button"
-            class="px-5 py-3.5 rounded-2xl bg-slate-900 hover:bg-slate-800 text-cyan-300 border border-cyan-400/30 font-gamer font-bold text-xs uppercase tracking-wider flex items-center gap-2 transition"
+            class="px-5 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl bg-slate-900 hover:bg-slate-800 text-cyan-300 border border-cyan-400/30 font-gamer font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition"
           >
             <i data-lucide="Maximize" class="w-4 h-4 text-cyan-400"></i>
             <span>Jogar no Portal</span>
@@ -615,7 +638,7 @@
             href="https://www.bible.com/pt"
             target="_blank"
             rel="noopener noreferrer"
-            class="btn-launch px-8 py-3.5 rounded-2xl font-gamer font-bold text-sm text-white uppercase tracking-wider flex items-center gap-2.5 shadow-xl"
+            class="btn-launch px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl font-gamer font-bold text-xs sm:text-sm text-white uppercase tracking-wider flex items-center justify-center gap-2.5 shadow-xl"
           >
             <i data-lucide="Play" class="w-4 h-4 fill-white"></i>
             <span>Abrir em Nova Aba</span>
@@ -630,104 +653,106 @@
   <!-- ===================================================================== -->
   <!-- MODAL 2: PAINEL ADICIONAR JOGO & GERADOR DE CÓDIGO (AO VIVO)          -->
   <!-- ===================================================================== -->
-  <div id="addGameModal" class="modal-backdrop fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-xl flex items-center justify-center p-4 overflow-y-auto" role="dialog" aria-modal="true">
-    <div class="modal-dialog glass-surface-elevated rounded-3xl max-w-4xl w-full p-6 sm:p-8 border border-indigo-400/40 shadow-2xl my-8 space-y-6">
+  <div id="addGameModal" class="modal-backdrop fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-xl flex items-center justify-center p-2 sm:p-4 overflow-y-auto" role="dialog" aria-modal="true">
+    <div class="modal-dialog glass-surface-elevated rounded-2xl sm:rounded-3xl max-w-4xl w-full max-h-[92vh] flex flex-col p-4 sm:p-8 border border-indigo-400/40 shadow-2xl my-auto space-y-4 sm:space-y-6">
       
       <!-- Cabeçalho do Modal -->
-      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
-        <div class="flex items-center gap-3">
-          <div class="p-2 rounded-xl bg-cyan-400/10 text-cyan-400">
-            <i data-lucide="Sparkles" class="w-6 h-6"></i>
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800 shrink-0">
+        <div class="flex items-center gap-2.5 sm:gap-3">
+          <div class="p-2 rounded-xl bg-cyan-400/10 text-cyan-400 shrink-0">
+            <i data-lucide="Sparkles" class="w-5 h-5 sm:w-6 sm:h-6"></i>
           </div>
           <div>
-            <h3 class="font-gamer text-lg sm:text-xl font-bold text-white">Adicionar Novo Jogo ou Aplicativo</h3>
-            <p class="text-xs text-slate-400">Preencha os campos para ver o card em tempo real e gerar o código para seu catálogo</p>
+            <h3 class="font-gamer text-base sm:text-xl font-bold text-white">Adicionar Novo Jogo ou App</h3>
+            <p class="text-[11px] sm:text-xs text-slate-400">Preencha os campos para ver o card ao vivo e gerar o código</p>
           </div>
         </div>
-        <button id="btnCloseAddGameModal" type="button" class="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white transition">
+        <button id="btnCloseAddGameModal" type="button" class="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white transition" title="Fechar">
           <i data-lucide="X" class="w-5 h-5"></i>
         </button>
       </div>
 
-      <!-- Layout em Duas Colunas: Formulário à Esquerda + Preview ao Vivo à Direita -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        
-        <!-- Formulário (7 Colunas) -->
-        <div class="lg:col-span-7 space-y-4">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label class="block text-xs font-medium text-slate-300 mb-1">Título do Jogo / App</label>
-              <input id="formTitle" type="text" value="Arca da Aliança: Construtores" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-white focus:border-cyan-400 focus:outline-none" />
+      <!-- Layout em Duas Colunas: Formulário à Esquerda + Preview ao Vivo à Direita (scroll interno no mobile) -->
+      <div class="overflow-y-auto flex-1 pr-1 space-y-4 sm:space-y-6">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          
+          <!-- Formulário (7 Colunas) -->
+          <div class="lg:col-span-7 space-y-3.5 sm:space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-medium text-slate-300 mb-1">Título do Jogo / App</label>
+                <input id="formTitle" type="text" value="Arca da Aliança: Construtores" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-white focus:border-cyan-400 focus:outline-none" />
+              </div>
+              <div>
+                <label class="block text-xs font-medium text-slate-300 mb-1">Subtítulo / Gênero</label>
+                <input id="formSub" type="text" value="Construção & Sobrevivência 3D" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-white focus:border-cyan-400 focus:outline-none" />
+              </div>
             </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-medium text-slate-300 mb-1">Categoria</label>
+                <select id="formCategory" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-white focus:border-cyan-400 focus:outline-none">
+                  <option value="biblico">Jogo Bíblico</option>
+                  <option value="educacional">Jogo Educacional</option>
+                  <option value="leitura">App de Leitura Bíblica</option>
+                  <option value="devocional">App Devocional</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-medium text-slate-300 mb-1">Caminho / URL da Capa</label>
+                <input id="formCover" type="text" value="assets/images/templo-dos-enigmas.jpg" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-white focus:border-cyan-400 focus:outline-none" />
+              </div>
+            </div>
+
             <div>
-              <label class="block text-xs font-medium text-slate-300 mb-1">Subtítulo / Gênero</label>
-              <input id="formSub" type="text" value="Construção & Sobrevivência 3D" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-white focus:border-cyan-400 focus:outline-none" />
+              <label class="block text-xs font-medium text-slate-300 mb-1">Link de Acesso (URL do Jogo)</label>
+              <input id="formLink" type="url" value="https://meu-jogo-biblico.com" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-white focus:border-cyan-400 focus:outline-none" />
+            </div>
+
+            <div>
+              <label class="block text-xs font-medium text-slate-300 mb-1">Descrição Curta</label>
+              <textarea id="formDesc" rows="2" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-white focus:border-cyan-400 focus:outline-none">Participe da edificação da grande embarcação sob a ordem divina e proteja os animais durante o dilúvio.</textarea>
+            </div>
+
+            <div>
+              <label class="block text-xs font-medium text-slate-300 mb-1">Tags (separadas por vírgula)</label>
+              <input id="formTags" type="text" value="Noé, Aventura, Construção, Gênesis" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-white focus:border-cyan-400 focus:outline-none" />
             </div>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label class="block text-xs font-medium text-slate-300 mb-1">Categoria</label>
-              <select id="formCategory" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-white focus:border-cyan-400 focus:outline-none">
-                <option value="biblico">Jogo Bíblico</option>
-                <option value="educacional">Jogo Educacional</option>
-                <option value="leitura">App de Leitura Bíblica</option>
-                <option value="devocional">App Devocional</option>
-              </select>
+          <!-- Preview em Tempo Real (5 Colunas) -->
+          <div class="lg:col-span-5 space-y-3">
+            <div class="text-xs font-gamer uppercase tracking-wider text-cyan-400 flex items-center gap-1.5">
+              <i data-lucide="Eye" class="w-3.5 h-3.5"></i>
+              <span>Preview do Card</span>
             </div>
-            <div>
-              <label class="block text-xs font-medium text-slate-300 mb-1">Caminho / URL da Capa</label>
-              <input id="formCover" type="text" value="assets/images/templo-dos-enigmas.jpg" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-white focus:border-cyan-400 focus:outline-none" />
+
+            <div class="store-card rounded-2xl overflow-hidden p-3.5 sm:p-4 border border-cyan-400/40 bg-slate-950/80 space-y-3">
+              <div class="aspect-video rounded-xl overflow-hidden bg-slate-900 relative">
+                <img id="prevCardImg" src="assets/images/templo-dos-enigmas.jpg" alt="Preview Capa" class="w-full h-full object-cover" />
+              </div>
+              <div>
+                <div id="prevCardSub" class="text-[11px] text-cyan-300 font-medium truncate">Construção & Sobrevivência 3D</div>
+                <h4 id="prevCardTitle" class="font-gamer text-sm font-bold text-white truncate">Arca da Aliança: Construtores</h4>
+                <p id="prevCardDesc" class="text-[11px] text-slate-400 line-clamp-2 mt-1">Participe da edificação da grande embarcação sob a ordem divina.</p>
+              </div>
+            </div>
+
+            <!-- Código Gerado -->
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] text-slate-400">Código para <code class="text-cyan-300">js/games-data.js</code>:</span>
+                <button id="btnCopyGeneratedCode" type="button" class="text-xs text-cyan-300 hover:text-white font-medium flex items-center gap-1">
+                  <i data-lucide="Copy" class="w-3 h-3"></i>
+                  <span>Copiar Código</span>
+                </button>
+              </div>
+              <pre id="generatedCodeSnippet" class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-[10px] font-mono text-cyan-300 overflow-x-auto max-h-40 no-scrollbar"></pre>
             </div>
           </div>
 
-          <div>
-            <label class="block text-xs font-medium text-slate-300 mb-1">Link de Acesso (URL do Jogo)</label>
-            <input id="formLink" type="url" value="https://meu-jogo-biblico.com" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-white focus:border-cyan-400 focus:outline-none" />
-          </div>
-
-          <div>
-            <label class="block text-xs font-medium text-slate-300 mb-1">Descrição Curta</label>
-            <textarea id="formDesc" rows="2" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-white focus:border-cyan-400 focus:outline-none">Participe da edificação da grande embarcação sob a ordem divina e proteja os animais durante o dilúvio.</textarea>
-          </div>
-
-          <div>
-            <label class="block text-xs font-medium text-slate-300 mb-1">Tags (separadas por vírgula)</label>
-            <input id="formTags" type="text" value="Noé, Aventura, Construção, Gênesis" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-white focus:border-cyan-400 focus:outline-none" />
-          </div>
         </div>
-
-        <!-- Preview em Tempo Real (5 Colunas) -->
-        <div class="lg:col-span-5 space-y-3">
-          <div class="text-xs font-gamer uppercase tracking-wider text-cyan-400 flex items-center gap-1.5">
-            <i data-lucide="Eye" class="w-3.5 h-3.5"></i>
-            <span>Preview do Card</span>
-          </div>
-
-          <div class="store-card rounded-2xl overflow-hidden p-4 border border-cyan-400/40 bg-slate-950/80 space-y-3">
-            <div class="aspect-video rounded-xl overflow-hidden bg-slate-900 relative">
-              <img id="prevCardImg" src="assets/images/templo-dos-enigmas.jpg" alt="Preview Capa" class="w-full h-full object-cover" />
-            </div>
-            <div>
-              <div id="prevCardSub" class="text-[11px] text-cyan-300 font-medium truncate">Construção & Sobrevivência 3D</div>
-              <h4 id="prevCardTitle" class="font-gamer text-sm font-bold text-white truncate">Arca da Aliança: Construtores</h4>
-              <p id="prevCardDesc" class="text-[11px] text-slate-400 line-clamp-2 mt-1">Participe da edificação da grande embarcação sob a ordem divina.</p>
-            </div>
-          </div>
-
-          <!-- Código Gerado -->
-          <div class="space-y-1.5">
-            <div class="flex items-center justify-between">
-              <span class="text-[11px] text-slate-400">Código para <code class="text-cyan-300">js/games-data.js</code>:</span>
-              <button id="btnCopyGeneratedCode" type="button" class="text-xs text-cyan-300 hover:text-white font-medium flex items-center gap-1">
-                <i data-lucide="Copy" class="w-3 h-3"></i>
-                <span>Copiar Código</span>
-              </button>
-            </div>
-            <pre id="generatedCodeSnippet" class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-[10px] font-mono text-cyan-300 overflow-x-auto max-h-40 no-scrollbar"></pre>
-          </div>
-        </div>
-
       </div>
 
     </div>

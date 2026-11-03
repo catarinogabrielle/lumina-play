@@ -284,7 +284,7 @@
   function createGameCardHtml(item, isCarousel = false) {
     const catMeta = getCategoryMeta(item.categoria);
     const isFav = userFavorites.has(item.id);
-    const widthClass = isCarousel ? 'w-[300px] sm:w-[340px] shrink-0' : 'w-full';
+    const widthClass = isCarousel ? 'w-[270px] sm:w-[340px] shrink-0' : 'w-full';
 
     return `
       <article
@@ -504,6 +504,19 @@
         const id = btn.getAttribute('data-open-details');
         openGameModal(id);
       });
+    });
+
+    // Toque ou clique no palco de mídia abre detalhes (otimizado para mobile)
+    containerEl.querySelectorAll('article[data-card-id]').forEach(cardEl => {
+      const id = cardEl.getAttribute('data-card-id');
+      const mediaStage = cardEl.querySelector('.media-stage');
+      if (mediaStage) {
+        mediaStage.addEventListener('click', (e) => {
+          if (e.target.closest('.btn-favorite') || e.target.closest('a')) return;
+          LuminaAudio.play('modalOpen');
+          openGameModal(id);
+        });
+      }
     });
 
     // Botão de Favoritar
@@ -1150,16 +1163,36 @@
       clearTagFilter();
     });
 
-    // Search Input
-    document.getElementById('globalSearchInput')?.addEventListener('input', (e) => {
+    // Search Inputs (Desktop & Mobile)
+    const globalSearchInput = document.getElementById('globalSearchInput');
+    const mobileSearchInput = document.getElementById('mobileSearchInput');
+    const mobileSearchBar = document.getElementById('mobileSearchBar');
+    const btnToggleMobileSearch = document.getElementById('btnToggleMobileSearch');
+
+    btnToggleMobileSearch?.addEventListener('click', () => {
+      LuminaAudio.play('click');
+      const isOpen = mobileSearchBar?.classList.toggle('is-open');
+      if (isOpen) {
+        setTimeout(() => mobileSearchInput?.focus(), 100);
+      }
+    });
+
+    globalSearchInput?.addEventListener('input', (e) => {
       searchFilter = e.target.value;
+      if (mobileSearchInput) mobileSearchInput.value = searchFilter;
+      renderCatalogGrid();
+    });
+
+    mobileSearchInput?.addEventListener('input', (e) => {
+      searchFilter = e.target.value;
+      if (globalSearchInput) globalSearchInput.value = searchFilter;
       renderCatalogGrid();
     });
 
     document.getElementById('btnClearSearch')?.addEventListener('click', () => {
       searchFilter = '';
-      const input = document.getElementById('globalSearchInput');
-      if (input) input.value = '';
+      if (globalSearchInput) globalSearchInput.value = '';
+      if (mobileSearchInput) mobileSearchInput.value = '';
       selectCategory('all');
     });
 
@@ -1273,6 +1306,8 @@
         closeGameModal();
         closeAddGameModal();
         document.getElementById('globalSearchInput')?.blur();
+        mobileSearchBar?.classList.remove('is-open');
+        mobileSearchInput?.blur();
       }
     });
   }

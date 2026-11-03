@@ -486,10 +486,12 @@ body {
   left: 0;
   right: 0;
   z-index: 45;
-  background: rgba(6, 8, 17, 0.92);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba(6, 8, 17, 0.94);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: max(8px, env(safe-area-inset-bottom, 8px));
+  box-shadow: 0 -4px 25px rgba(0, 0, 0, 0.6);
 }
 
 @media (min-width: 768px) {
@@ -504,17 +506,70 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 8px 4px 10px;
+  padding: 8px 4px 6px;
   color: #94a3b8;
   font-size: 10px;
   font-family: 'Orbitron', sans-serif;
   transition: color 0.2s ease, transform 0.2s ease;
+  min-height: 48px;
+  touch-action: manipulation;
 }
 
 .mobile-nav-item.is-active,
 .mobile-nav-item:active {
   color: #38bdf8;
   transform: translateY(-1px);
+}
+
+/* Espaçamento inferior do body no mobile para não cobrir o rodapé */
+body {
+  padding-bottom: 5.5rem;
+}
+
+@media (min-width: 768px) {
+  body {
+    padding-bottom: 0;
+  }
+}
+
+/* ==========================================================================
+   BARRA DE BUSCA EXPANSÍVEL MOBILE
+   ========================================================================== */
+#mobileSearchBar {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease, padding 0.3s ease;
+}
+
+#mobileSearchBar.is-open {
+  max-height: 80px;
+  opacity: 1;
+}
+
+/* ==========================================================================
+   OTIMIZAÇÕES RESPONSIVAS & TOUCH
+   ========================================================================== */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.no-scrollbar, .overflow-x-auto {
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 640px) {
+  .modal-dialog {
+    margin: 0.5rem;
+    max-height: 94vh;
+    border-radius: 1.25rem !important;
+  }
+  .store-card {
+    border-radius: 1.25rem !important;
+  }
+  .in-portal-player-frame {
+    min-height: 280px;
+  }
 }
 
 /* ==========================================================================
