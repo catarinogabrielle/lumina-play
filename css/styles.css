@@ -286,14 +286,27 @@ body {
 
 .hero-thumb-btn {
   position: relative;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
 }
 
 .hero-thumb-btn.is-active {
-  background: linear-gradient(90deg, rgba(6, 182, 212, 0.22) 0%, rgba(79, 70, 229, 0.2) 60%, rgba(15, 23, 42, 0.9) 100%);
-  border-color: rgba(56, 189, 248, 0.85);
-  box-shadow: 0 4px 20px -2px rgba(6, 182, 212, 0.25);
-  transform: translateX(4px);
+  background: linear-gradient(90deg, rgba(6, 182, 212, 0.22) 0%, rgba(79, 70, 229, 0.2) 60%, rgba(15, 23, 42, 0.95) 100%);
+  border: 1.5px solid #38bdf8 !important;
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.35), inset 0 0 15px rgba(6, 182, 212, 0.08);
+  transform: none !important;
+}
+
+.hero-thumb-btn.is-active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 18%;
+  bottom: 18%;
+  width: 4px;
+  background: linear-gradient(180deg, #38bdf8, #818cf8);
+  border-radius: 0 4px 4px 0;
+  box-shadow: 0 0 10px #38bdf8;
 }
 
 /* ==========================================================================

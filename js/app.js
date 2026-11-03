@@ -116,7 +116,7 @@
           data-hero-idx="${idx}"
           class="hero-thumb-btn flex items-center gap-3 p-2.5 rounded-2xl border text-left transition-all shrink-0 w-64 lg:w-full ${
             isActive
-              ? 'is-active'
+              ? 'is-active border-cyan-400'
               : 'bg-slate-900/65 hover:bg-slate-900 border-white/10 opacity-75 hover:opacity-100'
           }"
         >
