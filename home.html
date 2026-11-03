@@ -151,17 +151,6 @@
           <span id="soundStatusText" class="sr-only">SFX ON</span>
         </button>
 
-        <!-- Botão Adicionar Jogo / Gerador -->
-        <button
-          id="btnOpenAddGame"
-          type="button"
-          class="btn-launch px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl sm:rounded-2xl text-xs font-gamer font-bold text-white uppercase tracking-wider flex items-center gap-1.5 shrink-0 shadow-lg whitespace-nowrap"
-          title="Adicionar Jogo ou Gerar Código"
-        >
-          <i data-lucide="Plus" class="w-4 h-4"></i>
-          <span class="hidden sm:inline">Novo Jogo</span>
-        </button>
-
         <!-- Botão Menu Dropdown (< 1840px) -->
         <button
           id="btnHeaderMenuToggle"
@@ -685,114 +674,6 @@
             <span>Abrir em Nova Aba</span>
             <i data-lucide="ExternalLink" class="w-4 h-4"></i>
           </a>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ===================================================================== -->
-  <!-- MODAL 2: PAINEL ADICIONAR JOGO & GERADOR DE CÓDIGO (AO VIVO)          -->
-  <!-- ===================================================================== -->
-  <div id="addGameModal" class="modal-backdrop fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-xl flex items-center justify-center p-2 sm:p-4 overflow-y-auto" role="dialog" aria-modal="true">
-    <div class="modal-dialog glass-surface-elevated rounded-2xl sm:rounded-3xl max-w-4xl w-full max-h-[92vh] flex flex-col p-4 sm:p-8 border border-indigo-400/40 shadow-2xl my-auto space-y-4 sm:space-y-6">
-      
-      <!-- Cabeçalho do Modal -->
-      <div class="flex items-center justify-between pb-3 border-b border-slate-800 shrink-0">
-        <div class="flex items-center gap-2.5 sm:gap-3">
-          <div class="p-2 rounded-xl bg-cyan-400/10 text-cyan-400 shrink-0">
-            <i data-lucide="Sparkles" class="w-5 h-5 sm:w-6 sm:h-6"></i>
-          </div>
-          <div>
-            <h3 class="font-gamer text-base sm:text-xl font-bold text-white">Adicionar Novo Jogo ou App</h3>
-            <p class="text-[11px] sm:text-xs text-slate-400">Preencha os campos para ver o card ao vivo e gerar o código</p>
-          </div>
-        </div>
-        <button id="btnCloseAddGameModal" type="button" class="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white transition" title="Fechar">
-          <i data-lucide="X" class="w-5 h-5"></i>
-        </button>
-      </div>
-
-      <!-- Layout em Duas Colunas: Formulário à Esquerda + Preview ao Vivo à Direita (scroll interno no mobile) -->
-      <div class="overflow-y-auto flex-1 pr-1 space-y-4 sm:space-y-6">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-          
-          <!-- Formulário (7 Colunas) -->
-          <div class="lg:col-span-7 space-y-3.5 sm:space-y-4">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div>
-                <label class="block text-xs font-medium text-slate-300 mb-1">Título do Jogo / App</label>
-                <input id="formTitle" type="text" value="Arca da Aliança: Construtores" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-white focus:border-cyan-400 focus:outline-none" />
-              </div>
-              <div>
-                <label class="block text-xs font-medium text-slate-300 mb-1">Subtítulo / Gênero</label>
-                <input id="formSub" type="text" value="Construção & Sobrevivência 3D" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-white focus:border-cyan-400 focus:outline-none" />
-              </div>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div>
-                <label class="block text-xs font-medium text-slate-300 mb-1">Categoria</label>
-                <select id="formCategory" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-white focus:border-cyan-400 focus:outline-none">
-                  <option value="biblico">Jogo Bíblico</option>
-                  <option value="educacional">Jogo Educacional</option>
-                  <option value="leitura">App de Leitura Bíblica</option>
-                  <option value="devocional">App Devocional</option>
-                </select>
-              </div>
-              <div>
-                <label class="block text-xs font-medium text-slate-300 mb-1">Caminho / URL da Capa</label>
-                <input id="formCover" type="text" value="assets/images/templo-dos-enigmas.jpg" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-white focus:border-cyan-400 focus:outline-none" />
-              </div>
-            </div>
-
-            <div>
-              <label class="block text-xs font-medium text-slate-300 mb-1">Link de Acesso (URL do Jogo)</label>
-              <input id="formLink" type="url" value="https://meu-jogo-biblico.com" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-white focus:border-cyan-400 focus:outline-none" />
-            </div>
-
-            <div>
-              <label class="block text-xs font-medium text-slate-300 mb-1">Descrição Curta</label>
-              <textarea id="formDesc" rows="2" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-white focus:border-cyan-400 focus:outline-none">Participe da edificação da grande embarcação sob a ordem divina e proteja os animais durante o dilúvio.</textarea>
-            </div>
-
-            <div>
-              <label class="block text-xs font-medium text-slate-300 mb-1">Tags (separadas por vírgula)</label>
-              <input id="formTags" type="text" value="Noé, Aventura, Construção, Gênesis" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-white focus:border-cyan-400 focus:outline-none" />
-            </div>
-          </div>
-
-          <!-- Preview em Tempo Real (5 Colunas) -->
-          <div class="lg:col-span-5 space-y-3">
-            <div class="text-xs font-gamer uppercase tracking-wider text-cyan-400 flex items-center gap-1.5">
-              <i data-lucide="Eye" class="w-3.5 h-3.5"></i>
-              <span>Preview do Card</span>
-            </div>
-
-            <div class="store-card rounded-2xl overflow-hidden p-3.5 sm:p-4 border border-cyan-400/40 bg-slate-950/80 space-y-3">
-              <div class="aspect-video rounded-xl overflow-hidden bg-slate-900 relative">
-                <img id="prevCardImg" src="assets/images/templo-dos-enigmas.jpg" alt="Preview Capa" class="w-full h-full object-cover" />
-              </div>
-              <div>
-                <div id="prevCardSub" class="text-[11px] text-cyan-300 font-medium truncate">Construção & Sobrevivência 3D</div>
-                <h4 id="prevCardTitle" class="font-gamer text-sm font-bold text-white truncate">Arca da Aliança: Construtores</h4>
-                <p id="prevCardDesc" class="text-[11px] text-slate-400 line-clamp-2 mt-1">Participe da edificação da grande embarcação sob a ordem divina.</p>
-              </div>
-            </div>
-
-            <!-- Código Gerado -->
-            <div class="space-y-1.5">
-              <div class="flex items-center justify-between">
-                <span class="text-[11px] text-slate-400">Código para <code class="text-cyan-300">js/games-data.js</code>:</span>
-                <button id="btnCopyGeneratedCode" type="button" class="text-xs text-cyan-300 hover:text-white font-medium flex items-center gap-1">
-                  <i data-lucide="Copy" class="w-3 h-3"></i>
-                  <span>Copiar Código</span>
-                </button>
-              </div>
-              <pre id="generatedCodeSnippet" class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-[10px] font-mono text-cyan-300 overflow-x-auto max-h-40 no-scrollbar"></pre>
-            </div>
-          </div>
-
         </div>
       </div>
 

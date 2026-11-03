@@ -966,70 +966,7 @@
     }
   }
 
-  // --- 8. MODAL DE ADICIONAR JOGO & GERADOR DE CÓDIGO ---
-  function openAddGameModal() {
-    LuminaAudio.play('modalOpen');
-    const modal = document.getElementById('addGameModal');
-    if (modal) modal.classList.add('is-open');
-    updateLivePreviewFromForm();
-  }
-
-  function closeAddGameModal() {
-    LuminaAudio.play('modalClose');
-    const modal = document.getElementById('addGameModal');
-    if (modal) modal.classList.remove('is-open');
-  }
-
-  function updateLivePreviewFromForm() {
-    const title = document.getElementById('formTitle')?.value || 'Meu Novo Jogo Bíblico';
-    const sub = document.getElementById('formSub')?.value || 'Ação & Aventura 3D';
-    const cat = document.getElementById('formCategory')?.value || 'biblico';
-    const link = document.getElementById('formLink')?.value || 'https://...';
-    const cover = document.getElementById('formCover')?.value || 'assets/images/cronicas-de-davi.jpg';
-    const desc = document.getElementById('formDesc')?.value || 'Descrição envolvente para os usuários do portal...';
-    const tags = (document.getElementById('formTags')?.value || 'Bíblia, Aventura').split(',').map(s => s.trim());
-
-    // Atualiza preview no card modelo
-    const prevTitle = document.getElementById('prevCardTitle');
-    if (prevTitle) prevTitle.textContent = title;
-    const prevSub = document.getElementById('prevCardSub');
-    if (prevSub) prevSub.textContent = sub;
-    const prevDesc = document.getElementById('prevCardDesc');
-    if (prevDesc) prevDesc.textContent = desc;
-    const prevImg = document.getElementById('prevCardImg');
-    if (prevImg) prevImg.src = cover;
-
-    // Gera o código JSON pronto para copiar
-    const generatedJson = {
-      id: title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
-      titulo: title,
-      subtitulo: sub,
-      categoria: cat,
-      urlDestino: link,
-      imagemCapa: cover,
-      videoHoverUrl: '',
-      temaAnimacao: cat === 'educacional' ? 'puzzle' : cat === 'leitura' ? 'leitura' : 'davi',
-      avaliacao: '5.0',
-      avaliacoesCount: '1',
-      faixaEtaria: 'Livre',
-      plataformas: ['Web', 'Android'],
-      botaoTexto: 'Jogar Agora',
-      destaqueCarrossel: false,
-      badgeEspecial: 'Novo',
-      referenciaBiblica: 'Escrituras Sagradas',
-      recursos: ['Experiência bíblica interativa'],
-      descricao: desc,
-      descricaoLonga: desc,
-      tags: tags
-    };
-
-    const codeOutput = document.getElementById('generatedCodeSnippet');
-    if (codeOutput) {
-      codeOutput.textContent = JSON.stringify(generatedJson, null, 2);
-    }
-  }
-
-  // --- 9. COMPARTILHAR JOGO ---
+  // --- 8. COMPARTILHAR JOGO ---
   async function shareCurrentGame() {
     if (!currentOpenGameId) return;
     const item = CATALOGO_JOGOS_E_APPS.find(x => x.id === currentOpenGameId);
@@ -1234,30 +1171,6 @@
     // Modal In-Portal Player Toggle
     document.getElementById('btnToggleInPortalPlayer')?.addEventListener('click', toggleInPortalPlayer);
 
-    // Add Game & Code Guide Modal
-    document.getElementById('btnOpenAddGame')?.addEventListener('click', openAddGameModal);
-    document.getElementById('btnCloseAddGameModal')?.addEventListener('click', closeAddGameModal);
-    document.getElementById('addGameModal')?.addEventListener('click', (e) => {
-      if (e.target.id === 'addGameModal') closeAddGameModal();
-    });
-
-    // Add Game Form inputs live listener
-    ['formTitle', 'formSub', 'formCategory', 'formLink', 'formCover', 'formDesc', 'formTags'].forEach(id => {
-      document.getElementById(id)?.addEventListener('input', updateLivePreviewFromForm);
-    });
-
-    document.getElementById('btnCopyGeneratedCode')?.addEventListener('click', async () => {
-      const code = document.getElementById('generatedCodeSnippet')?.textContent;
-      if (!code) return;
-      try {
-        await navigator.clipboard.writeText(code);
-        LuminaAudio.play('click');
-        showToast('Código copiado! Cole no seu games-data.js', 'CheckCheck');
-      } catch (e) {
-        showToast('Não foi possível copiar o código', 'AlertCircle');
-      }
-    });
-
     // PWA Install Button
     document.getElementById('btnPwaInstall')?.addEventListener('click', async () => {
       if (!deferredPrompt) return;
@@ -1340,7 +1253,6 @@
       }
       if (e.key === 'Escape') {
         closeGameModal();
-        closeAddGameModal();
         document.getElementById('globalSearchInput')?.blur();
         mobileSearchBar?.classList.remove('is-open');
         mobileSearchInput?.blur();
