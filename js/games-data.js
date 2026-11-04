@@ -1,15 +1,15 @@
 /**
  * ==============================================================================
- * LUMINA PLAY - BANCO DE DADOS DE JOGOS & APLICATIVOS
+ * LUMINA PLAY - BANCO DE DADOS DE GAMES, JOGOS EDUCACIONAIS & APLICAÇÕES
  * ==============================================================================
- * Para adicionar um novo jogo ou app ao seu portal, basta adicionar um novo
+ * Para adicionar um novo jogo ou aplicação ao seu portal, basta adicionar um novo
  * objeto no array CATALOGO_JOGOS_E_APPS abaixo.
  *
  * Campos suportados:
  * - id: Identificador único em minúsculas (sem espaços)
- * - titulo: Nome principal do jogo ou app
+ * - titulo: Nome principal do jogo ou aplicação
  * - subtitulo: Slogan ou gênero explicativo
- * - categoria: 'biblico' | 'educacional' | 'leitura' | 'devocional'
+ * - categoria: 'jogos' | 'educacional' | 'aplicativos' | 'utilitarios'
  * - urlDestino: Link de acesso direto para o usuário jogar/abrir
  * - imagemCapa: Caminho relativo ou URL da capa (formato 16:9 recomendado)
  * - videoHoverUrl: (Opcional) Link de vídeo .mp4/.webm para rodar no hover
@@ -18,10 +18,10 @@
  * - avaliacoesCount: Quantidade de avaliações (ex: '2.4k')
  * - faixaEtaria: 'Livre' | '+10' | '+12'
  * - plataformas: Array de plataformas compatíveis (ex: ['Web', 'Android', 'PC'])
- * - botaoTexto: Texto de ação (ex: 'Jogar Agora', 'Iniciar App')
+ * - botaoTexto: Texto de ação (ex: 'Jogar Agora', 'Abrir App')
  * - destaqueCarrossel: true para aparecer no carrossel de topo
  * - badgeEspecial: 'Destaque da Semana' | 'Novo' | 'Mais Jogado' | 'Atualizado'
- * - referenciaBiblica: Texto com livro e capítulo correspondente
+ * - temaDestaque: Texto indicando o tema, universo ou especialidade do projeto
  * - recursos: Lista de diferenciais do jogo/app
  * - descricao: Resumo curto exibido no card
  * - descricaoLonga: Sinopse completa exibida no modal
@@ -33,9 +33,9 @@ const CATALOGO_JOGOS_E_APPS = [
   {
     id: 'cronicas-de-davi',
     titulo: 'Crônicas de Davi: Vale de Elá',
-    subtitulo: 'Ação & Aventura Bíblica em 3D',
-    categoria: 'biblico',
-    urlDestino: 'https://www.bible.com/pt/bible/129/1SA.17.NVI',
+    subtitulo: 'Ação & Aventura em 3D',
+    categoria: 'jogos',
+    urlDestino: '#catalogoCompleto',
     imagemCapa: 'assets/images/cronicas-de-davi.jpg',
     videoHoverUrl: '', // Deixe vazio para usar a simulação visual 60fps nativa
     temaAnimacao: 'davi',
@@ -46,23 +46,23 @@ const CATALOGO_JOGOS_E_APPS = [
     botaoTexto: 'Jogar Agora',
     destaqueCarrossel: true,
     badgeEspecial: 'Destaque da Semana',
-    referenciaBiblica: '1 Samuel 17:1-58',
+    temaDestaque: 'Ação & Aventura 3D • Vale de Elá',
     recursos: [
       'Batalha tática e mira de precisão com a funda de pastor',
       'Cenários históricos do Vale de Elá recriados em 3D',
-      'Desafios de coragem, fé e versículos memoráveis',
+      'Desafios de coragem, reflexos rápidos e progressão de fases',
       'Trilha sonora épica orquestrada e efeitos imersivos'
     ],
-    descricao: 'Viva a jornada épica do jovem pastor de Belém até o confronto histórico contra o gigante Golias. Desafios de fé, precisão com a funda radiante e fases bíblicas fieis às Escrituras.',
-    descricaoLonga: 'Embarque em uma jornada cinematográfica pelas colinas da Judeia. Em "Crônicas de Davi: Vale de Elá", os jogadores assumem o papel de Davi enfrentando leões, ursos e a intimidação do exército filisteu, culminando no combate lendário contra Golias munido apenas de sua fé em Deus e de cinco pedras lisas do ribeiro.',
-    tags: ['Aventura 3D', 'Antigo Testamento', 'Heróis da Fé', 'Action RPG', 'Davi e Golias']
+    descricao: 'Viva a jornada épica do jovem pastor de Belém até o confronto histórico contra o gigante Golias. Desafios de estratégia, precisão com a funda radiante e fases cheias de ação.',
+    descricaoLonga: 'Embarque em uma jornada cinematográfica pelas colinas da Judeia. Em "Crônicas de Davi: Vale de Elá", os jogadores assumem o papel de Davi enfrentando leões, ursos e a intimidação do exército filisteu, culminando no combate lendário contra Golias munido de coragem e cinco pedras lisas do ribeiro.',
+    tags: ['Aventura 3D', 'Ação', 'Heróis', 'Action RPG', 'Davi e Golias']
   },
   {
     id: 'exodo-travessia',
     titulo: 'Êxodo: A Travessia do Mar',
     subtitulo: 'Estratégia & Jornada Histórica',
-    categoria: 'biblico',
-    urlDestino: 'https://www.bible.com/pt/bible/129/EXO.14.NVI',
+    categoria: 'jogos',
+    urlDestino: '#catalogoCompleto',
     imagemCapa: 'assets/images/exodo-travessia.jpg',
     videoHoverUrl: '',
     temaAnimacao: 'exodo',
@@ -70,26 +70,26 @@ const CATALOGO_JOGOS_E_APPS = [
     avaliacoesCount: '1.9k',
     faixaEtaria: 'Livre',
     plataformas: ['Web', 'Android', 'iOS', 'PC'],
-    botaoTexto: 'Liderar o Povo',
+    botaoTexto: 'Jogar Agora',
     destaqueCarrossel: true,
     badgeEspecial: 'Mais Jogado',
-    referenciaBiblica: 'Êxodo 14:1-31',
+    temaDestaque: 'Estratégia em Tempo Real • Travessia',
     recursos: [
       'Simulação de travessia com mar dividindo em tempo real',
-      'Gerenciamento de provisões, ânimo do povo e liderança',
-      'Coluna de fogo e nuvem que guiavam Israel',
+      'Gerenciamento de provisões, ânimo do grupo e liderança',
+      'Coluna de fogo e nuvem iluminando o caminho noturno',
       'Modo Campanha Histórica com notas arqueológicas'
     ],
-    descricao: 'Guie o povo de Israel através do deserto sob a coluna de fogo e atravesse o Mar Vermelho em uma experiência cinematográfica repleta de decisões estratégicas e fé.',
-    descricaoLonga: 'Sinta o peso e a glória da maior marcha de libertação da história humana. Como líder auxiliando Moisés, você deve manter o povo unido perante o exército egípcio até o momento milagroso em que as águas do Mar Vermelho se abrem em muralhas líquidas para a passagem a pé enxuto.',
-    tags: ['Estratégia', 'Moisés', 'História Bíblica', 'Campanha', 'Milagres']
+    descricao: 'Guie a caravana através do deserto sob a coluna de fogo e atravesse o Mar Vermelho em uma experiência cinematográfica repleta de decisões estratégicas.',
+    descricaoLonga: 'Sinta o peso e a emoção de uma grande marcha histórica de libertação. Como estrategista e líder, você deve manter o grupo unido no deserto até o momento decisivo em que as águas do Mar Vermelho se abrem em muralhas líquidas.',
+    tags: ['Estratégia', 'Jornada Histórica', 'Simulação', 'Campanha', 'Aventura']
   },
   {
     id: 'templo-dos-enigmas',
     titulo: 'Sanctum Logos: Templo da Sabedoria',
-    subtitulo: 'Jogo Educacional de Lógica & Parábolas',
+    subtitulo: 'Jogo Educacional de Lógica & Enigmas',
     categoria: 'educacional',
-    urlDestino: 'https://www.bible.com/pt/bible/129/PRO.1.NVI',
+    urlDestino: '#catalogoCompleto',
     imagemCapa: 'assets/images/templo-dos-enigmas.jpg',
     videoHoverUrl: '',
     temaAnimacao: 'puzzle',
@@ -100,23 +100,23 @@ const CATALOGO_JOGOS_E_APPS = [
     botaoTexto: 'Iniciar Desafio',
     destaqueCarrossel: true,
     badgeEspecial: 'Educacional',
-    referenciaBiblica: 'Provérbios 1-4 & Parábolas dos Evangelhos',
+    temaDestaque: 'Raciocínio Lógico, Matemática & Enigmas',
     recursos: [
       'Mais de 80 quebra-cabeças geométricos e desafios de lógica',
-      'Coleção de pergaminhos antigos com ensinamentos de Salomão',
+      'Coleção de pergaminhos antigos com provérbios de sabedoria',
       'Ambiente sonoro sereno propício para foco e aprendizado',
-      'Adequado para todas as idades, reforçando raciocínio e sabedoria'
+      'Adequado para todas as idades, estimulando raciocínio e memória'
     ],
-    descricao: 'Desvende pergaminhos dourados, constelações geométricas e desafios de raciocínio lógico inspirados nos Provérbios de Salomão e nas Parábolas de Jesus.',
-    descricaoLonga: 'Sanctum Logos une o melhor dos jogos de raciocínio espacial e lógica verbal aos grandes princípios de integridade, sabedoria e justiça encontrados no livro de Provérbios. Cada câmara resolvida revela um ensinamento prático para o dia a dia.',
-    tags: ['Educacional', 'Quebra-Cabeça', 'Lógica & Memória', 'Salomão', 'Provérbios']
+    descricao: 'Desvende pergaminhos dourados, constelações geométricas e desafios de raciocínio lógico projetados para exercitar a mente e a resolução de problemas.',
+    descricaoLonga: 'Sanctum Logos une o melhor dos jogos educacionais de raciocínio espacial, matemática recreativa e lógica verbal. Cada câmara resolvida desbloqueia novos mecanismos interativos e desafios cognitivos progressivos.',
+    tags: ['Educacional', 'Quebra-Cabeça', 'Lógica & Memória', 'Sabedoria', 'Enigmas']
   },
   {
     id: 'codex-jerusalem-360',
-    titulo: 'Codex Bíblico Holográfico 365',
-    subtitulo: 'Aplicação Interativa para Leitura Bíblica',
-    categoria: 'leitura',
-    urlDestino: 'https://www.bible.com/pt/reading-plans',
+    titulo: 'Codex Atlas Holográfico 365',
+    subtitulo: 'Aplicação Interativa de Mapas 3D & Estudo',
+    categoria: 'aplicativos',
+    urlDestino: '#catalogoCompleto',
     imagemCapa: 'assets/images/codex-jerusalem-360.jpg',
     videoHoverUrl: '',
     temaAnimacao: 'leitura',
@@ -124,26 +124,26 @@ const CATALOGO_JOGOS_E_APPS = [
     avaliacoesCount: '3.1k',
     faixaEtaria: 'Livre',
     plataformas: ['Web', 'Android', 'iOS', 'PWA'],
-    botaoTexto: 'Abrir App de Leitura',
+    botaoTexto: 'Abrir Aplicação',
     destaqueCarrossel: true,
     badgeEspecial: 'Top Avaliado',
-    referenciaBiblica: 'Bíblia Sagrada Completa',
+    temaDestaque: 'Atlas Interativo 3D & Cronologia',
     recursos: [
-      'Linha do tempo interativa conectando Gênesis a Apocalipse',
-      'Mapas 3D das cidades bíblicas na época de Cristo',
-      'Sistema de ofensiva diária (streaks) e conquistas de leitura',
-      'Dicionário original grego e hebraico com pronúncia'
+      'Linha do tempo interativa conectando grandes eras históricas',
+      'Mapas 3D de cidades antigas reconstruídas em alta definição',
+      'Sistema de ofensiva diária (streaks) e conquistas de estudo',
+      'Glossário de termos históricos e idiomas clássicos com pronúncia'
     ],
-    descricao: 'Transforme sua leitura bíblica diária com mapas cronológicos interativos, reconstrução visual de Jerusalém, planos de leitura gamificados e acompanhamento de metas.',
-    descricaoLonga: 'O Codex 365 é muito mais do que um leitor digital: é um hub imersivo de estudo e leitura diária. Com visual holográfico e arquitetura moderna, o app permite visualizar conexões entre profecias do Antigo Testamento e seu cumprimento nos Evangelhos com um único toque.',
-    tags: ['Plano de Leitura', 'Mapas 3D', 'Estudo Bíblico', 'Ofensiva Diária', 'Gamificação']
+    descricao: 'Transforme seus estudos e leituras diárias com mapas cronológicos interativos, reconstrução visual em 3D, planos gamificados e acompanhamento de metas.',
+    descricaoLonga: 'O Codex 365 é uma aplicação web interativa de estudo, leitura e exploração histórica. Com visual holográfico e arquitetura moderna, o app permite visualizar conexões cronológicas, rotas geográficas e mapas tridimensionais com um único toque.',
+    tags: ['Aplicativo', 'Mapas 3D', 'Estudo Interativo', 'Ofensiva Diária', 'Gamificação']
   },
   {
     id: 'jardim-das-oliveiras-devocional',
-    titulo: 'Monte das Oliveiras: Devocional Diário',
-    subtitulo: 'Aplicativo de Meditação, Leitura & Oração',
-    categoria: 'devocional',
-    urlDestino: 'https://www.bible.com/pt/verse-of-the-day',
+    titulo: 'Monte das Oliveiras: Foco & Meditação',
+    subtitulo: 'Aplicativo de Bem-Estar, Áudio Ambiente & Diário',
+    categoria: 'utilitarios',
+    urlDestino: '#catalogoCompleto',
     imagemCapa: 'assets/images/jardim-das-oliveiras-devocional.jpg',
     videoHoverUrl: '',
     temaAnimacao: 'devocional',
@@ -151,26 +151,26 @@ const CATALOGO_JOGOS_E_APPS = [
     avaliacoesCount: '2.8k',
     faixaEtaria: 'Livre',
     plataformas: ['Web', 'Android', 'iOS'],
-    botaoTexto: 'Acessar Devocional',
+    botaoTexto: 'Abrir Aplicativo',
     destaqueCarrossel: true,
-    badgeEspecial: 'Paz & Oração',
-    referenciaBiblica: 'Salmos & Filipenses 4:6-7',
+    badgeEspecial: 'Foco & Calma',
+    temaDestaque: 'Produtividade, Áudio Ambiente & Reflexão',
     recursos: [
-      'Reflexões em áudio ao nascer e ao pôr do sol',
-      'Diário de oração protegido com acompanhamento de respostas',
-      'Sons ambientes da natureza: brisa, harpa e oliveiras',
-      'Versículo do dia temático para momentos de ansiedade e esperança'
+      'Sessões guiadas em áudio ao nascer e ao pôr do sol',
+      'Diário pessoal de metas, gratidão e anotações rápidas',
+      'Sons ambientes da natureza: brisa, harpa acústica e oliveiras',
+      'Modo foco (Pomodoro suave) para estudo e leitura tranquila'
     ],
-    descricao: 'Comece o dia em paz com reflexões bíblicas guiadas ao nascer do sol, trilha instrumental relaxante, diário de oração interativo e versículos temáticos.',
-    descricaoLonga: 'Projetado para ser um santuário de serenidade no meio da correria diária, o aplicativo Monte das Oliveiras oferece meditações bíblicas curtas e profundas, ajudando a cultivar uma vida de oração constante e intimidade com Deus.',
-    tags: ['Devocional', 'Oração', 'Áudio Meditação', 'Paz & Reflexão', 'Salmos']
+    descricao: 'Comece o dia com foco e serenidade através de trilhas instrumentais relaxantes, sons da natureza, diário interativo e reflexões diárias.',
+    descricaoLonga: 'Projetado para ser um espaço digital de serenidade e concentração no meio da correria diária, o aplicativo Monte das Oliveiras combina paisagens sonoras relaxantes com ferramentas práticas de organização mental e reflexão.',
+    tags: ['Web App', 'Produtividade', 'Áudio Ambiente', 'Foco & Calma', 'Diário']
   },
   {
     id: 'rotas-de-paulo-odisseia',
-    titulo: 'Odisseia no Mediterrâneo: Viagens de Paulo',
-    subtitulo: 'Jogo Educacional de Geografia & Missões',
+    titulo: 'Odisseia no Mediterrâneo: Rotas Antigas',
+    subtitulo: 'Jogo Educacional de Geografia & Navegação',
     categoria: 'educacional',
-    urlDestino: 'https://www.bible.com/pt/bible/129/ACT.13.NVI',
+    urlDestino: '#catalogoCompleto',
     imagemCapa: 'assets/images/rotas-de-paulo-odisseia.jpg',
     videoHoverUrl: '',
     temaAnimacao: 'navio',
@@ -181,66 +181,66 @@ const CATALOGO_JOGOS_E_APPS = [
     botaoTexto: 'Navegar Agora',
     destaqueCarrossel: false,
     badgeEspecial: 'Atualizado',
-    referenciaBiblica: 'Atos dos Apóstolos 13-28',
+    temaDestaque: 'Geografia Histórica & Navegação Marítima',
     recursos: [
-      'Navegação realista em mapa marítimo do Império Romano',
-      'Desafios de tempestades, naufrágios em Malta e pregações',
-      'Curiosidades históricas sobre as cartas aos Gálatas, Efésios e Coríntios',
-      'Modo Quiz Missionário com pontuação global'
+      'Navegação realista em mapa marítimo do Mar Mediterrâneo',
+      'Desafios de tempestades, ventos marítimos e escalas em Malta',
+      'Curiosidades históricas e culturais sobre cidades como Atenas, Éfeso e Roma',
+      'Modo Quiz Geográfico com pontuação global'
     ],
-    descricao: 'Assuma o leme nas viagens missionárias do Apóstolo Paulo pelo Mar Mediterrâneo. Explore cidades históricas como Antioquia, Éfeso, Corinto e Roma enquanto aprende Atos dos Apóstolos.',
-    descricaoLonga: 'Reviva as três grandes viagens missionárias do apóstolo Paulo e sua derradeira jornada rumo a Roma. Enfrente tormentas no Mar Egeu, responda a debates no Areópago de Atenas e compreenda a expansão da mensagem do Evangelho no primeiro século.',
-    tags: ['Geografia Bíblica', 'Atos dos Apóstolos', 'Exploração', 'Educacional', 'Paulo']
+    descricao: 'Assuma o leme em grandes expedições pelo Mar Mediterrâneo. Explore cidades históricas como Antioquia, Éfeso, Corinto e Roma enquanto aprende geografia e história.',
+    descricaoLonga: 'Reviva grandes viagens marítimas pelo Mediterrâneo rumo a Roma. Enfrente tormentas no Mar Egeu, gerencie sua embarcação e explore a geografia e a história das principais metrópoles da Antiguidade.',
+    tags: ['Geografia', 'História', 'Exploração', 'Educacional', 'Navegação']
   }
 ];
 
 /**
  * ==============================================================================
- * DESAFIO BÍBLICO DIÁRIO (GAMIFICAÇÃO & OFENSIVA DE FÉ)
+ * DESAFIO GAMER DIÁRIO (GAMIFICAÇÃO & OFENSIVA DIÁRIA)
  * ==============================================================================
- * Perguntas dinâmicas que alternam diariamente para engajar os jogadores.
+ * Perguntas dinâmicas de lógica, história, cultura gamer e conhecimentos gerais.
  * ==============================================================================
  */
 const DESAFIOS_DIARIOS = [
   {
     id: 1,
-    pergunta: 'Quantas pedras lisas Davi escolheu no ribeiro antes de enfrentar Golias?',
+    pergunta: 'Em "Crônicas de Davi: Vale de Elá", quantas pedras lisas do ribeiro são coletadas antes do confronto contra Golias?',
     opcoes: ['3 pedras', '5 pedras', '7 pedras', '12 pedras'],
     correta: 1, // '5 pedras'
-    referencia: '1 Samuel 17:40',
-    explicacao: 'Davi escolheu cinco pedras lisas do ribeiro e as colocou no alforje de pastor.'
+    referencia: 'Cultura & História',
+    explicacao: 'Foram escolhidas cinco pedras lisas do ribeiro e guardadas no alforje de pastor.'
   },
   {
     id: 2,
-    pergunta: 'Qual sinal guiou o povo de Israel pelo deserto durante a noite no livro de Êxodo?',
-    opcoes: ['Uma estrela cadente', 'Uma coluna de fogo', 'Um arco-íris brilhante', 'Uma nuvem dourada'],
-    correta: 1, // 'Uma coluna de fogo'
-    referencia: 'Êxodo 13:21-22',
-    explicacao: 'De dia o Senhor ia adiante numa coluna de nuvem e de noite numa coluna de fogo.'
+    pergunta: 'Em qual mar se passam as rotas de navegação de Antioquia, Éfeso, Creta, Malta e Roma na Antiguidade?',
+    opcoes: ['Mar Vermelho', 'Mar Mediterrâneo', 'Mar Cáspio', 'Mar do Norte'],
+    correta: 1, // 'Mar Mediterrâneo'
+    referencia: 'Geografia & Navegação',
+    explicacao: 'O Mar Mediterrâneo conectava os principais portos da Ásia Menor, Grécia, ilhas de Creta e Malta até a península Itálica.'
   },
   {
     id: 3,
-    pergunta: 'Segundo Provérbios, qual é o princípio da sabedoria?',
-    opcoes: ['O estudo da filosofia', 'O temor do Senhor', 'A leitura de muitos livros', 'A riqueza material'],
-    correta: 1, // 'O temor do Senhor'
-    referencia: 'Provérbios 9:10',
-    explicacao: 'O temor do Senhor é o princípio da sabedoria, e o conhecimento do Santo é entendimento.'
+    pergunta: 'Na lógica computacional e nos jogos digitais a 60 FPS, quantos milissegundos aproximadamente dura cada quadro (frame)?',
+    opcoes: ['16,6 ms', '33,3 ms', '60,0 ms', '100,0 ms'],
+    correta: 0, // '16,6 ms'
+    referencia: 'Tecnologia & Games',
+    explicacao: 'Dividindo 1000 milissegundos (1 segundo) por 60 quadros, cada frame é renderizado em cerca de 16,67 ms.'
   },
   {
     id: 4,
-    pergunta: 'Em qual ilha o Apóstolo Paulo sofreu um naufrágio durante sua viagem a Roma?',
-    opcoes: ['Chipre', 'Creta', 'Malta', 'Patmos'],
-    correta: 2, // 'Malta'
-    referencia: 'Atos 28:1',
-    explicacao: 'Depois de salvos, descobriram que a ilha se chamava Malta, onde foram acolhidos com bondade.'
+    pergunta: 'Se uma sequência lógica nos pergaminhos de "Sanctum Logos" segue os números 2, 6, 12, 20, 30... qual é o próximo número?',
+    opcoes: ['36', '40', '42', '48'],
+    correta: 2, // '42'
+    referencia: 'Raciocínio Lógico',
+    explicacao: 'As diferenças entre os termos aumentam em números pares (+4, +6, +8, +10, +12). Portanto: 30 + 12 = 42.'
   },
   {
     id: 5,
-    pergunta: 'Em qual monte Jesus costumava orar e passou seus momentos antes da crucificação?',
-    opcoes: ['Monte Sinai', 'Monte das Oliveiras', 'Monte Carmelo', 'Monte Tabor'],
-    correta: 1, // 'Monte das Oliveiras'
-    referencia: 'Lucas 22:39',
-    explicacao: 'Como de costume, Jesus foi para o monte das Oliveiras, e os seus discípulos o seguiram.'
+    pergunta: 'Qual recurso tecnológico permite instalar uma aplicação web moderna diretamente na tela inicial do celular ou PC?',
+    opcoes: ['PWA (Progressive Web App)', 'BIOS', 'Bluetooth Mesh', 'VRAM'],
+    correta: 0, // 'PWA (Progressive Web App)'
+    referencia: 'Aplicações Web',
+    explicacao: 'Progressive Web Apps (PWA) usam Web App Manifest e Service Workers para funcionar como aplicativos instaláveis.'
   }
 ];
 
@@ -249,9 +249,9 @@ const DESAFIOS_DIARIOS = [
  */
 function getCategoryMeta(cat) {
   const meta = {
-    biblico: {
-      label: 'Jogo Bíblico',
-      badgeClass: 'badge-biblico',
+    jogos: {
+      label: 'Game & Aventura',
+      badgeClass: 'badge-jogos',
       icon: 'Swords',
       color: '#38bdf8'
     },
@@ -261,18 +261,18 @@ function getCategoryMeta(cat) {
       icon: 'Puzzle',
       color: '#c084fc'
     },
-    leitura: {
-      label: 'App de Leitura Bíblica',
-      badgeClass: 'badge-leitura',
-      icon: 'BookOpen',
+    aplicativos: {
+      label: 'Aplicativo Interativo',
+      badgeClass: 'badge-aplicativos',
+      icon: 'Layers',
       color: '#34d399'
     },
-    devocional: {
-      label: 'App Devocional',
-      badgeClass: 'badge-devocional',
+    utilitarios: {
+      label: 'Web App & Utilitário',
+      badgeClass: 'badge-utilitarios',
       icon: 'Sparkles',
       color: '#fbbf24'
     }
   };
-  return meta[cat] || meta.biblico;
+  return meta[cat] || meta.jogos;
 }

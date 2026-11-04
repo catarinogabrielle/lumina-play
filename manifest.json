@@ -1,7 +1,7 @@
 {
-  "name": "Lumina Play — Hub de Jogos Bíblicos & Apps",
+  "name": "Lumina Play — Plataforma de Games, Jogos Educacionais & Aplicações",
   "short_name": "Lumina Play",
-  "description": "Portal oficial de jogos bíblicos 3D, jogos educacionais, leitura bíblica gamificada e aplicativos devocionais.",
+  "description": "Plataforma oficial de games 3D, jogos educacionais, experiências interativas e aplicações modernas.",
   "start_url": "./home.html",
   "display": "standalone",
   "background_color": "#060811",

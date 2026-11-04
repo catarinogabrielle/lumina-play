@@ -1,6 +1,6 @@
-# LUMINA PLAY — Vitrine Gamer & Storefront Hub
+# LUMINA PLAY — Plataforma de Games, Jogos Educacionais & Aplicações
 
-> **Portal oficial de Jogos Bíblicos, Educacionais, Leitura Bíblica & Aplicativos Devocionais.**
+> **Hub oficial de Games, Jogos Educacionais, Experiências Interativas & Aplicações Web.**
 
 ---
 
@@ -50,42 +50,39 @@ c:\projetos\Lumina Play\
    - O filtro "Favoritos" no menu permite ver apenas os itens salvos (armazenados em `localStorage`).
 
 5. **Ficha Técnica & Trailer Modal**:
-   - Modal cinematográfico com sinopse estendida, recursos do jogo, plataformas compatíveis (Web, Android, iOS, PC), referências bíblicas e botão de compartilhamento rápido com cópia de link e toast.
+   - Modal cinematográfico com sinopse estendida, recursos do jogo, plataformas compatíveis (Web, Android, iOS, PC), tema de destaque e botão de compartilhamento rápido com cópia de link e toast.
 
-6. **Gerador Visual de Novos Jogos ("Novo Jogo")**:
-   - Botão no menu superior que abre um gerador onde você preenche o título, link e capa, visualiza o card em tempo real e copia o código JSON pronto para colar em `js/games-data.js`.
-
-7. **Efeitos Sonoros Procedurais (Web Audio API)**:
+6. **Efeitos Sonoros Procedurais (Web Audio API)**:
    - Efeitos de hover, clique, abrir modal, favoritar e play com sintetizador Web Audio nativo e botão de mute com persistência.
 
-8. **PWA (Progressive Web App) & Instalação**:
+7. **PWA (Progressive Web App) & Instalação**:
    - Suporte completo a instalação como aplicativo desktop ou mobile (`manifest.json` e `sw.js`).
    - Botão dinâmico "Instalar App" no cabeçalho quando o navegador oferece suporte.
 
-9. **Desafio Bíblico Diário & Ofensiva de Fé (Gamificação)**:
-   - Quiz dinâmico com rotação diária de perguntas bíblicas, sistema de ofensiva (*streaks*) salvo no navegador e feedback com versículo.
+8. **Desafio Gamer Diário & Ofensiva Diária (Gamificação)**:
+   - Quiz dinâmico com rotação diária de perguntas de lógica, tecnologia e cultura, sistema de ofensiva (*streaks*) salvo no navegador e feedback explicativo.
 
-10. **Alternador de Visualização (Grade vs. Lista Estilo Steam)**:
+9. **Alternador de Visualização (Grade vs. Lista Estilo Steam)**:
     - Botões para alternar instantaneamente entre a visualização de cards com vídeo ou tabela detalhada em linha.
 
-11. **Modo 'Jogar no Portal' (Embed Player)**:
+10. **Modo 'Jogar no Portal' (Embed Player)**:
     - Opção dentro do modal de detalhes para carregar o jogo/app diretamente no portal com controle de tela cheia ou abrir em nova aba.
 
-12. **Barra de Navegação Inferior para Celulares (Mobile Dock)**:
+11. **Barra de Navegação Inferior para Celulares (Mobile Dock)**:
     - Navegação rápida fixa no rodapé para dispositivos móveis com acesso a Início, Jogos, Desafio e Favoritos.
 
 ---
 
-## 🛠️ Como Adicionar um Novo Jogo ou App
+## 🛠️ Como Adicionar um Novo Jogo ou Aplicação
 
 Abra o arquivo [js/games-data.js](file:///c:/projetos/Lumina%20Play/js/games-data.js) e adicione um novo bloco no array `CATALOGO_JOGOS_E_APPS`:
 
 ```javascript
 {
-  id: 'meu-jogo-biblico',
-  titulo: 'Nome do Seu Jogo',
-  subtitulo: 'Aventura Bíblica em 3D',
-  categoria: 'biblico', // 'biblico' | 'educacional' | 'leitura' | 'devocional'
+  id: 'meu-novo-game',
+  titulo: 'Nome do Seu Jogo ou App',
+  subtitulo: 'Aventura 3D / Aplicação Interativa',
+  categoria: 'jogos', // 'jogos' | 'educacional' | 'aplicativos' | 'utilitarios'
   urlDestino: 'https://link-do-seu-jogo.com',
   imagemCapa: 'assets/images/sua-capa.jpg',
   videoHoverUrl: '', // Opcional: link para vídeo .mp4
@@ -97,11 +94,11 @@ Abra o arquivo [js/games-data.js](file:///c:/projetos/Lumina%20Play/js/games-dat
   botaoTexto: 'Jogar Agora',
   destaqueCarrossel: true,
   badgeEspecial: 'Novo',
-  referenciaBiblica: 'Gênesis 1',
-  recursos: ['Gráficos imersivos', 'Modo offline', 'Livre para a família'],
+  temaDestaque: 'Ação & Estratégia',
+  recursos: ['Gráficos imersivos', 'Modo offline', 'Multiplataforma'],
   descricao: 'Descrição curta para o card...',
   descricaoLonga: 'Sinopse detalhada para o modal de detalhes...',
-  tags: ['Aventura', 'Quiz', 'História']
+  tags: ['Aventura', 'Educacional', 'Web App']
 }
 ```
 

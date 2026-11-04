@@ -3,7 +3,7 @@
  * LUMINA PLAY - MAIN APPLICATION CONTROLLER
  * ==============================================================================
  * Gerenciamento de estado, Hero Carousel, Catálogo Dinâmico, Favoritos,
- * Visualização em Grid/Lista, Desafio Bíblico Diário, Avaliação por Estrelas,
+ * Visualização em Grid/Lista, Desafio Gamer Diário, Avaliação por Estrelas,
  * Modais interativos, PWA e Notificações Toast.
  * ==============================================================================
  */
@@ -443,7 +443,7 @@
                 ${catMeta.label}
               </span>
               <span class="text-amber-400 font-bold text-xs">★ ${item.avaliacao}</span>
-              <span class="text-[10px] text-slate-500 hidden md:inline">• ${item.referenciaBiblica || ''}</span>
+              <span class="text-[10px] text-slate-500 hidden md:inline">• ${item.temaDestaque || ''}</span>
             </div>
             <h3 class="font-gamer text-sm sm:text-base font-bold text-white group-hover:text-cyan-300 transition truncate">
               ${item.titulo}
@@ -588,9 +588,9 @@
         const inTitle = item.titulo.toLowerCase().includes(q);
         const inSub = item.subtitulo.toLowerCase().includes(q);
         const inDesc = item.descricao.toLowerCase().includes(q);
-        const inRef = (item.referenciaBiblica || '').toLowerCase().includes(q);
+        const inTema = (item.temaDestaque || '').toLowerCase().includes(q);
         const inTags = (item.tags || []).some(t => t.toLowerCase().includes(q));
-        return inTitle || inSub || inDesc || inRef || inTags;
+        return inTitle || inSub || inDesc || inTema || inTags;
       }
       return true;
     });
@@ -691,9 +691,9 @@
     const ratingEl = document.getElementById('modalRating');
     if (ratingEl) ratingEl.textContent = `★ ${item.avaliacao} (${item.avaliacoesCount || '2k'} avaliações)`;
 
-    const refEl = document.getElementById('modalRefBiblica');
-    if (refEl) {
-      refEl.textContent = item.referenciaBiblica || 'Inspirado nas Escrituras';
+    const temaEl = document.getElementById('modalTemaDestaque');
+    if (temaEl) {
+      temaEl.textContent = item.temaDestaque || 'Experiência Interativa';
     }
 
     const descEl = document.getElementById('modalDescription');
@@ -720,8 +720,8 @@
     const featuresContainer = document.getElementById('modalFeatures');
     if (featuresContainer) {
       const features = item.recursos || [
-        'Narrativa bíblica fiel aos manuscritos',
-        'Experiência acessível e gratuita para toda a família',
+        'Design interativo e imersivo de alta performance',
+        'Experiência acessível e gratuita para todas as idades',
         'Compatível com computadores, celulares e tablets'
       ];
       featuresContainer.innerHTML = features.map(f => `
@@ -880,7 +880,7 @@
     }
   }
 
-  // --- 7. DESAFIO BÍBLICO DIÁRIO & OFENSIVA DE FÉ (GAMIFICAÇÃO) ---
+  // --- 7. DESAFIO GAMER DIÁRIO & OFENSIVA DIÁRIA (GAMIFICAÇÃO) ---
   function initDailyChallenge() {
     if (typeof DESAFIOS_DIARIOS === 'undefined' || DESAFIOS_DIARIOS.length === 0) return;
 
@@ -947,10 +947,10 @@
               localStorage.setItem('lumina_streak_date', todayStr);
               if (streakEl) streakEl.textContent = streak;
             }
-            showToast('Resposta Correta! Ofensiva de Fé +1!', 'Sparkles');
+            showToast('Resposta Correta! Ofensiva Diária +1!', 'Sparkles');
           } else {
             LuminaAudio.play('click');
-            showToast('Não foi dessa vez. Continue estudando a Palavra!', 'BookOpen');
+            showToast('Não foi dessa vez. Tente novamente amanhã!', 'Compass');
           }
 
           localStorage.setItem('lumina_answered_' + todayStr, 'true');
