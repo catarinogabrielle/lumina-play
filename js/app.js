@@ -74,6 +74,53 @@
     if (dropdownBadge) dropdownBadge.textContent = userFavorites.size;
   }
 
+  // --- MECANISMO INTELIGENTE DE LANÇAMENTO (PWA / APP INSTALADO) ---
+  function launchGame(gameIdOrItem) {
+    const item = typeof gameIdOrItem === 'string'
+      ? CATALOGO_JOGOS_E_APPS.find(x => x.id === gameIdOrItem)
+      : gameIdOrItem;
+
+    if (!item) return;
+
+    LuminaAudio.play('launch');
+    const targetUrl = item.urlDestino;
+    const isAndroid = /android/i.test(navigator.userAgent);
+
+    // 1. Android: disparar Intent para abrir o PWA/TWA/WebAPK instalado diretamente sem nova aba no navegador
+    if (isAndroid) {
+      const cleanHostAndPath = targetUrl.replace(/^https?:\/\//, '');
+      const pkg = item.pwaPackage || 'br.org.missoes.fronteiras';
+      const intentUrl = `intent://${cleanHostAndPath}#Intent;scheme=https;package=${pkg};action=android.intent.action.VIEW;S.browser_fallback_url=${encodeURIComponent(targetUrl)};end;`;
+      window.location.href = intentUrl;
+      return;
+    }
+
+    // 2. Desktop (Windows / Mac) com protocolo personalizado do PWA instalado:
+    if (item.protocolScheme) {
+      const protoUri = `${item.protocolScheme}://open`;
+      const protoFrame = document.createElement('iframe');
+      protoFrame.style.display = 'none';
+      document.body.appendChild(protoFrame);
+      try {
+        protoFrame.src = protoUri;
+      } catch (e) {}
+      setTimeout(() => {
+        try { protoFrame.remove(); } catch (e) {}
+      }, 1200);
+    }
+
+    // 3. Desktop / Navegadores:
+    // Para que o Chrome/Edge intercepte e abra na janela do PWA instalado (Link Capturing + launch_handler):
+    // Usamos um nome de janela de app fixo ('LuminaPwa_<id>') ao invés de '_blank'.
+    // Isso permite ao navegador focar na instância PWA standalone já instalada.
+    const appTargetName = `LuminaPwa_${item.id.replace(/[^a-zA-Z0-9]/g, '_')}`;
+    const openedWindow = window.open(targetUrl, appTargetName);
+
+    if (!openedWindow || openedWindow.closed) {
+      window.location.href = targetUrl;
+    }
+  }
+
   // --- 2. SISTEMA DE TOAST NOTIFICATIONS ---
   let toastTimer = null;
   function showToast(message, iconName = 'CheckCircle2') {
@@ -204,7 +251,10 @@
     const launchLink = document.getElementById('heroLaunchLink');
     if (launchLink) {
       launchLink.href = item.urlDestino;
-      launchLink.onclick = () => LuminaAudio.play('launch');
+      launchLink.onclick = (e) => {
+        e.preventDefault();
+        launchGame(item);
+      };
     }
 
     const launchBtnText = document.getElementById('heroLaunchBtnText');
@@ -324,16 +374,14 @@
 
               <!-- Quick Play Overlay Button -->
               <div class="relative z-10 flex items-center justify-center">
-                <a
-                  href="${item.urlDestino}"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onclick="LuminaAudio.play('launch')"
-                  class="px-4 py-2 rounded-xl bg-cyan-400 text-slate-950 font-gamer font-extrabold text-xs uppercase tracking-wider shadow-xl flex items-center gap-1.5 transform scale-95 group-hover:scale-100 transition"
+                <button
+                  type="button"
+                  data-launch-game="${item.id}"
+                  class="px-4 py-2 rounded-xl bg-cyan-400 text-slate-950 font-gamer font-extrabold text-xs uppercase tracking-wider shadow-xl flex items-center gap-1.5 transform scale-95 group-hover:scale-100 transition cursor-pointer"
                 >
                   <i data-lucide="Play" class="w-3.5 h-3.5 fill-slate-950"></i>
                   <span>${item.botaoTexto || 'Jogar Agora'}</span>
-                </a>
+                </button>
               </div>
 
               <!-- Bottom Preview Info -->
@@ -369,9 +417,9 @@
             </div>
 
             <h3 class="font-gamer text-base sm:text-lg font-bold text-white group-hover:text-cyan-300 transition leading-snug">
-              <a href="${item.urlDestino}" target="_blank" rel="noopener noreferrer" onclick="LuminaAudio.play('launch')" class="hover:underline">
+              <button type="button" data-launch-game="${item.id}" class="hover:underline text-left cursor-pointer">
                 ${item.titulo}
-              </a>
+              </button>
             </h3>
 
             <p class="text-xs text-slate-300 leading-relaxed line-clamp-2">
@@ -394,16 +442,14 @@
 
         <!-- Rodapé do Card com Ações -->
         <div class="px-5 pb-5 pt-2 flex items-center gap-2">
-          <a
-            href="${item.urlDestino}"
-            target="_blank"
-            rel="noopener noreferrer"
-            onclick="LuminaAudio.play('launch')"
-            class="flex-1 btn-launch py-2.5 px-4 rounded-xl font-gamer font-bold text-xs text-white uppercase tracking-wider flex items-center justify-center gap-2"
+          <button
+            type="button"
+            data-launch-game="${item.id}"
+            class="flex-1 btn-launch py-2.5 px-4 rounded-xl font-gamer font-bold text-xs text-white uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer"
           >
             <span>${item.botaoTexto || 'Jogar Agora'}</span>
-            <i data-lucide="ExternalLink" class="w-3.5 h-3.5"></i>
-          </a>
+            <i data-lucide="Play" class="w-3.5 h-3.5 fill-white"></i>
+          </button>
 
           <button
             type="button"
@@ -466,16 +512,14 @@
             <i data-lucide="Film" class="w-4 h-4"></i>
           </button>
 
-          <a
-            href="${item.urlDestino}"
-            target="_blank"
-            rel="noopener noreferrer"
-            onclick="LuminaAudio.play('launch')"
-            class="btn-launch px-4 py-2.5 rounded-xl font-gamer font-bold text-xs text-white uppercase tracking-wider flex items-center gap-1.5"
+          <button
+            type="button"
+            data-launch-game="${item.id}"
+            class="btn-launch px-4 py-2.5 rounded-xl font-gamer font-bold text-xs text-white uppercase tracking-wider flex items-center gap-1.5 cursor-pointer"
           >
             <i data-lucide="Play" class="w-3.5 h-3.5 fill-white"></i>
             <span>${item.botaoTexto || 'Jogar'}</span>
-          </a>
+          </button>
         </div>
       </article>
     `;
@@ -494,6 +538,16 @@
         cardEl.addEventListener('mouseleave', () => stopCardHoverPreview(cardEl));
       });
     }
+
+    // Gatilho inteligente para Jogar (PWA / App se instalado)
+    containerEl.querySelectorAll('[data-launch-game]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const id = btn.getAttribute('data-launch-game');
+        launchGame(id);
+      });
+    });
 
     containerEl.querySelectorAll('.btn-open-details').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -678,7 +732,10 @@
     const launchBtn = document.getElementById('modalLaunchBtn');
     if (launchBtn) {
       launchBtn.href = item.urlDestino;
-      launchBtn.onclick = () => LuminaAudio.play('launch');
+      launchBtn.onclick = (e) => {
+        e.preventDefault();
+        launchGame(item);
+      };
     }
 
     // Plataformas
