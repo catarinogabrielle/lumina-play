@@ -36,6 +36,34 @@ const CATALOGO_JOGOS_E_APPS = [
     descricao: 'Escolha seu herói, explore 8 fronteiras do mundo em 3D, derrote as sombras e leve esperança a cada cultura.',
     descricaoLonga: 'Em Missão Fronteiras: O Chamado, você faz parte da Base Missionária Ide em uma aventura de Mundo Aberto 3D. Escolha seu herói, explore 8 fronteiras culturais ao redor do globo, pilote veículos táticos, jogue em Modo Dupla Co-Op no celular ou PC, derrote as sombras e leve esperança a cada cultura.',
     tags: ['Mundo Aberto 3D', 'Modo Dupla Co-Op', 'Celular e PC', '8 Culturas', 'Aventura 3D', 'Educacional']
+  },
+  {
+    id: 'mundinho-magico',
+    titulo: 'Mundinho Mágico: Jogos Educativos',
+    subtitulo: 'Arca de Noé • Atelier de Pintura • Trem dos Números • Alfabetização',
+    categoria: 'educacional',
+    categorias: ['educacional', 'jogos'],
+    urlDestino: 'https://mundoisrael.vercel.app/',
+    suportaPwa: true,
+    imagemCapa: 'promo/arte-mundinho-magico-horizontal-16x9.jpg',
+    imagemHero: 'promo/mundinho-magico-arte-limpa-16x9.jpg',
+    videoHoverUrl: 'promo/video-mundinho-magico-horizontal-16x9.mp4',
+    avaliacao: '5.0',
+    faixaEtaria: 'Livre',
+    plataformas: ['Web', 'Android', 'iOS', 'PC', 'PWA'],
+    botaoTexto: 'Jogar Grátis',
+    destaqueCarrossel: true,
+    badgeEspecial: 'Educativo Infantil',
+    temaDestaque: 'Arca dos Animais • Pintura Interativa • Letras & Números',
+    recursos: [
+      'Mini-games educativos com Arca de Noé, animais animados e sons divertidos',
+      'Atelier de pintura livre com borracha, cores vibrantes e traços mágicos',
+      'Trem dos números inteligente e jogos de alfabetização inicial para crianças',
+      'Pista de corrida colorida e desafios de raciocínio lógico leves e seguros'
+    ],
+    descricao: 'Mundinho Mágico: jogos educativos cheios de amor, alegria e aprendizado para crianças! Arca de Noé, pista de corrida, atelier de pintura, trem dos números e alfabetização.',
+    descricaoLonga: 'Mundinho Mágico é uma plataforma lúdica e segura de jogos educativos para crianças. Repleto de ilustrações acolhedoras e atividades interativas, inclui o mini-game da Arca de Noé com animais animados, atelier de desenho e pintura com borracha, pista de corrida com jipes coloridos, o trem dos números para matemática inicial e jogos de alfabetização com letras ABC.',
+    tags: ['Educacional', 'Infantil', 'Arca de Noé', 'Pintura', 'Alfabetização', 'Crianças']
   }
 ];
 

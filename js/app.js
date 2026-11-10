@@ -89,8 +89,8 @@
     // 1. Android: disparar Intent para abrir o PWA/TWA/WebAPK instalado diretamente sem nova aba no navegador
     if (isAndroid) {
       const cleanHostAndPath = targetUrl.replace(/^https?:\/\//, '');
-      const pkg = item.pwaPackage || 'br.org.missoes.fronteiras';
-      const intentUrl = `intent://${cleanHostAndPath}#Intent;scheme=https;package=${pkg};action=android.intent.action.VIEW;S.browser_fallback_url=${encodeURIComponent(targetUrl)};end;`;
+      const pkgClause = item.pwaPackage ? `package=${item.pwaPackage};` : '';
+      const intentUrl = `intent://${cleanHostAndPath}#Intent;scheme=https;${pkgClause}action=android.intent.action.VIEW;S.browser_fallback_url=${encodeURIComponent(targetUrl)};end;`;
       window.location.href = intentUrl;
       return;
     }
