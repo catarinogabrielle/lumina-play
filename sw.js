@@ -3,7 +3,7 @@
  * Cache e suporte a execução offline básica (PWA)
  */
 
-const CACHE_NAME = 'lumina-play-v1';
+const CACHE_NAME = 'lumina-play-v2';
 const ASSETS_TO_CACHE = [
   './home.html',
   './index.html',
