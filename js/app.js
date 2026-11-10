@@ -123,7 +123,7 @@
 
   // --- 2. SISTEMA DE TOAST NOTIFICATIONS ---
   let toastTimer = null;
-  function showToast(message, iconName = 'CheckCircle2') {
+  function showToast(message, iconName = 'check-circle-2') {
     const toast = document.getElementById('toastNotification');
     const msgEl = document.getElementById('toastMessage');
     const iconEl = document.getElementById('toastIcon');
@@ -755,7 +755,7 @@
       const features = item.recursos || [];
       featuresContainer.innerHTML = features.map(f => `
         <li class="flex items-start gap-2.5 text-xs text-slate-300">
-          <i data-lucide="CheckCircle2" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+          <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
           <span>${f}</span>
         </li>
       `).join('');
@@ -1056,9 +1056,9 @@
       const statusText = document.getElementById('soundStatusText');
       const soundIcon = document.getElementById('soundIcon');
       if (statusText) statusText.textContent = active ? 'SFX ON' : 'SFX OFF';
-      if (soundIcon) soundIcon.setAttribute('data-lucide', active ? 'Volume2' : 'VolumeX');
+      if (soundIcon) soundIcon.setAttribute('data-lucide', active ? 'volume-2' : 'volume-x');
       if (window.lucide) lucide.createIcons();
-      showToast(active ? 'Sons da interface ativados' : 'Sons da interface desativados', active ? 'Volume2' : 'VolumeX');
+      showToast(active ? 'Sons da interface ativados' : 'Sons da interface desativados', active ? 'volume-2' : 'volume-x');
     });
 
     document.getElementById('btnClosePreviewModal')?.addEventListener('click', closeGameModal);
@@ -1078,7 +1078,7 @@
       deferredPrompt.prompt();
       const choice = await deferredPrompt.userChoice;
       if (choice && choice.outcome === 'accepted') {
-        showToast('Lumina Play instalado como App!', 'Download');
+        showToast('Lumina Play instalado como App!', 'download');
       }
       deferredPrompt = null;
       document.getElementById('btnPwaInstall')?.classList.add('hidden');
@@ -1166,7 +1166,7 @@
     const statusText = document.getElementById('soundStatusText');
     const soundIcon = document.getElementById('soundIcon');
     if (statusText) statusText.textContent = isSfx ? 'SFX ON' : 'SFX OFF';
-    if (soundIcon) soundIcon.setAttribute('data-lucide', isSfx ? 'Volume2' : 'VolumeX');
+    if (soundIcon) soundIcon.setAttribute('data-lucide', isSfx ? 'volume-2' : 'volume-x');
 
     updateFavoriteCounters();
     setHeroSlide(0);
